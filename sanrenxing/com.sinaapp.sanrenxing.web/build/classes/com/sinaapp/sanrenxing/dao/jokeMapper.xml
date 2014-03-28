@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sinaapp.sanrenxing.dao.JokeDao">
+	<insert id="insertJoke">
+		insert into joke (
+		id,
+		title,
+		joke
+		)
+		values(
+		#{id},
+		#{title,jdbcType=VARCHAR},
+		#{joke,jdbcType=VARCHAR}
+		)
+	</insert>
+	
+	<insert id="insertUseJoke">
+		insert into use_joke (
+		useid,
+		jokeid
+		)
+		values(
+		#{useId,jdbcType=VARCHAR},
+		#{jokeId,jdbcType=VARCHAR}
+		)
+	</insert>
+	<select id="randomSelectOneJoke" parameterType="String"
+		resultType="com.sinaapp.sanrenxing.bean.JokeBean">
+		Select id,title,joke From joke where id not in(select jokeid
+		from
+		use_joke where useid = #{useId}) Order By Rand() Limit 1;
+	</select>
+	
+	<select id="getJoke" parameterType="int"
+		resultType="com.sinaapp.sanrenxing.bean.JokeBean">
+		Select id,title,joke From joke where id = #{id};
+	</select>
+	
+	<select id="getUseJokeCount" parameterType="String" resultType="int">
+		select count(jokeid)  from use_joke where useid = #{useId};
+	</select>
+	
+	
+	<select id="getUseJokeId" parameterType="String" resultType="int">
+		select jokeid  from use_joke where useid = #{useId};
+	</select>
+	
+	<select id="getJokeCount" parameterType="String"
+		resultType="int">
+		select count(id)  from joke;
+	</select>
+	
+	
+	<select id="getJokeIds"	resultType="int" >
+		select id  from joke;
+	</select>
+	
+	
+	<delete id="clearUseJoke" parameterType="String">
+		delete from  use_joke where useid = #{useId};
+	</delete>
+	
+</mapper>

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;WeixinUtil.java&apos; to &apos;com.qq.weixin.sdk/src/com.qq.weixin.sdk.util&apos;&#x0D;&#x0A;- Original project: &apos;WeChat4j&apos;&#x0D;&#x0A;- Destination element: &apos;com.qq.weixin.sdk/src/com.qq.weixin.sdk.util&apos;&#x0D;&#x0A;- Original element: &apos;com.qq.weixin.sdk.WeixinUtil.java&apos;" description="Copy compilation unit" destination="=com.qq.weixin.sdk/src&lt;com.qq.weixin.sdk.util" element1="/src&lt;com.qq.weixin.sdk{WeixinUtil.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1393740697310" units="1" version="1.0"/>
+</session>

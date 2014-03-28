@@ -1,0 +1,81 @@
+1393637952699	Delete element
+1393639529273	Delete element
+1393639548678	Rename type 'MessageEvent'
+1393639557149	Rename type 'MessageImage'
+1393639565120	Rename type 'MessageLink'
+1393639573093	Rename type 'MessageLocation'
+1393639593093	Rename type 'MessageText'
+1393639636697	Move compilation unit
+1393674270552	Rename type 'IMessage'
+1393674751512	Rename type 'ImageMessage'
+1393674914739	Copy compilation unit
+1393675382071	Copy compilation unit
+1393676302677	Copy compilation unit
+1393676337332	Rename field 'picUrl'
+1393677401065	Rename package 'com.qq.weixin.sdk.message'
+1393677739072	Delete element
+1393677745732	Copy compilation units
+1393677794276	Copy compilation units
+1393677828480	Rename type 'Message'
+1393677841303	Delete element
+1393677843684	Delete element
+1393677860449	Delete element
+1393677862665	Delete element
+1393677889153	Delete element
+1393677935803	Rename type 'VoiceMessage'
+1393677941088	Rename type 'TextMessage'
+1393677945810	Rename type 'VideoMessage'
+1393677952964	Rename type 'CommenMessage'
+1393677961018	Rename type 'LocationMessage'
+1393677967353	Rename type 'PictureMessage'
+1393677983946	Rename type 'MultimediaMessage'
+1393677994867	Rename type 'LinkMessage'
+1393678952229	Rename package 'com.qq.weixin.sdk.receivemessage'
+1393679007465	Delete element
+1393679018051	Delete element
+1393679022965	Copy compilation units
+1393679029317	Delete elements
+1393679059166	Rename type 'AbstractReceivedMultimediaMessage'
+1393679108481	Rename type 'ReceivedCommenMessage'
+1393679117529	Move compilation unit
+1393679153925	Delete element
+1393679200941	Delete elements
+1393679853564	Delete elements
+1393679879184	Rename package 'com.qq.weixin.sdk.receive.eventmessage'
+1393679896469	Rename type 'EventMessage'
+1393681666571	Copy compilation unit
+1393682742996	Copy compilation unit
+1393682865641	Rename type 'SubscribeOrNotEvent'
+1393682878521	Copy compilation unit
+1393683097579	Copy compilation unit
+1393683353586	Delete elements
+1393683409143	Rename package 'com.qq.weixin.sdk.responsemessage'
+1393683742772	Delete elements
+1393683746984	Delete elements
+1393684355116	Copy compilation unit
+1393684368948	Rename type 'AbstractReceivedMessage'
+1393684380599	Copy compilation units
+1393684518208	Rename type 'MessageResultMusic'
+1393684584977	Delete elements
+1393684596346	Copy compilation unit
+1393684695723	Rename type 'ResponsePictureMessage'
+1393684755758	Copy compilation unit
+1393684802457	Rename type 'ResponseTestMessage'
+1393684820038	Copy compilation unit
+1393684870073	Copy compilation unit
+1393684970127	Copy compilation unit
+1393685368522	Copy compilation unit
+1393685529206	Delete elements
+1393687161725	Move compilation unit
+1393687462524	Copy compilation unit
+1393687477738	Rename type 'AbstractResponseMessage'
+1393687978164	Copy compilation unit
+1393688046780	Copy compilation unit
+1393688121008	Rename type 'ServicePictureMessage'
+1393688139613	Rename type 'ServiceMultimediaMessage'
+1393688224596	Copy compilation unit
+1393688309882	Copy compilation unit
+1393688332955	Copy compilation unit
+1393688417848	Copy compilation unit
+1393688531963	Copy compilation unit
+1393688732315	Delete element

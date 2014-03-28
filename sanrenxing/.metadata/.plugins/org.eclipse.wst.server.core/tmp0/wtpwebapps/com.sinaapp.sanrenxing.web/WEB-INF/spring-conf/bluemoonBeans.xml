@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+    
+	<!-- bean id="userMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.sinaapp.sanrenxing.service.JokeService" />
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean-->
+    
+	
+	<bean id="jokeService" class="com.sinaapp.sanrenxing.service.impl.JokeServiceImpl">
+		<!-- property name="userMapper" ref="userMapper" /-->
+	</bean>
+	
+</beans>

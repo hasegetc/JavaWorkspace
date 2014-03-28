@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+
+<project default="main" basedir=".">
+
+<echo message="build SDK"/>
+
+<echo message="calling the web services generation ant task: axis_client"/>
+
+ <target name="main" >
+  	 <wsgen/>
+  </target>
+  
+</project>

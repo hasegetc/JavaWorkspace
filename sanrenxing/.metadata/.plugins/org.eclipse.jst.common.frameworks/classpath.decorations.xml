@@ -1,0 +1,7 @@
+<classpath>
+  <container id="com.sinaapp.sanrenxing.web!org.eclipse.jst.j2ee.internal.web.container">
+    <entry id="D:/workspace/sanrenxing/com.sinaapp.sanrenxing.web/WebContent/WEB-INF/lib/com.qq.weixin.sdk.jar">
+      <source-attachment-path>/com.qq.weixin.sdk</source-attachment-path>
+    </entry>
+  </container>
+</classpath>

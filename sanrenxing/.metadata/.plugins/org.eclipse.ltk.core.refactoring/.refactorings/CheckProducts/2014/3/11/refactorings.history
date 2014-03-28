@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename field &apos;birthdays&apos; in &apos;com.test.bean.AccountBean&apos; to &apos;bs&apos;&#x0D;&#x0A;- Original project: &apos;CheckProducts&apos;&#x0D;&#x0A;- Original element: &apos;com.test.bean.AccountBean.birthdays&apos;&#x0D;&#x0A;- Renamed element: &apos;com.test.bean.AccountBean.bs&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" delegate="false" deprecate="false" description="Rename field &apos;birthdays&apos;" flags="589826" getter="false" id="org.eclipse.jdt.ui.rename.field" input="/src&lt;com.test.bean{AccountBean.java[AccountBean^birthdays" name="bs" references="true" setter="false" stamp="1394723363100" textual="false" version="1.0"/>
+</session>

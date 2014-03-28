@@ -1,0 +1,7 @@
+1394335809463	Rename method 'initJokeId'
+1394858820860	Delete element
+1394861031440	Rename local variable 'responseXml'
+1394867581213	Extract method 'getAccessTokenFromWeixin'
+1394868203736	Extract local variable 'b'
+1394868249548	Rename local variable 'is'
+1394869265086	Rename method 'post'

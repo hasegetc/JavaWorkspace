@@ -1,0 +1,38 @@
+1393736105794	Copy compilation unit
+1393740765343	Rename type 'SanRenXing'
+1393740773202	Rename type 'Sanrenxing'
+1393741060092	Rename type 'SanrenxingConsts'
+1393741284193	Extract local variable 'isSanrenxing'
+1393769604429	Rename method 'parseInputStreamToMessage'
+1393861502496	Extract local variable 'out'
+1393867244048	Extract method 'textResponse'
+1394025188464	Delete element
+1394098945485	Copy compilation unit
+1394099512353	Extract method 'handleGetReqest'
+1394099531212	Extract method 'handlePostRequest'
+1394099545969	Rename method 'handleGetReqest'
+1394100183335	Delete element
+1394100264560	Rename type 'TestSimsimi'
+1394100492959	Rename method 'talk'
+1394100549932	Rename local variable 'httpget'
+1394100758616	Extract method 'initHttpGet'
+1394195860382	Extract local variable 'title'
+1394195868489	Extract local variable 'joke'
+1394199869604	Copy compilation unit
+1394199918349	Copy file
+1394200085569	Copy compilation unit
+1394200360740	Copy compilation unit
+1394200687628	Rename type 'StoryUtil'
+1394257578072	Rename resource 'conf'
+1394257632873	Rename resource 'hluemoonBeans'
+1394258389622	Rename type 'JokeService'
+1394258402475	Rename type 'JokeServiceInteface'
+1394258903155	Move 1 resources to 'WEB-INF'
+1394259752256	Rename resource 'hluemoonBeans.xml'
+1394282253197	Extract method 'getBean'
+1394284654957	Extract local variable 'bean'
+1394285025008	Extract local variable 'bean'
+1394285753394	Rename method 'testUseId'
+1394286414988	Extract local variable 'content'
+1394286681433	Extract local variable 'response'
+1394286745766	Extract local variable 'fromUserName'
