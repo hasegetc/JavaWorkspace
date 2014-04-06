@@ -1,0 +1,110 @@
+package com.sinaapp.sanrenxing.action;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.log4j.Logger;
+import org.apache.struts2.ServletActionContext;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
+import com.opensymphony.xwork2.ActionContext;
+import com.opensymphony.xwork2.ActionSupport;
+import com.sinaapp.sanrenxing.bean.RegisterLesson;
+import com.sinaapp.sanrenxing.service.RegisterService;
+
+@Component
+@Scope("prototype")
+public class UnregisterAction extends ActionSupport {
+	private static final long serialVersionUID = -3617424650852024180L;
+	@Autowired
+	private RegisterService service;
+	
+	private Logger logger = Logger.getLogger(UnregisterAction.class);
+	private String useid;
+	private Map<String, List<String>> lessonMap = new HashMap<String, List<String>>();
+	public String getUseRegisterLesson() {
+
+		// 得到数据库中已经在在的值
+		List<RegisterLesson> registedLessons = this.service
+				.getRegistedLesson(useid);
+
+		for (RegisterLesson v : registedLessons) {
+			addLessonMap(v);
+		}
+
+		ActionContext context = ActionContext.getContext();
+		String result = parse2Json();
+		context.getSession().put("result", result);
+		return SUCCESS;
+	}
+
+	public String unregisterAllLesson() {
+		this.service.unregisterAllLesson(useid);
+		return NONE;
+	}
+
+	public String unregisterLesson() {
+
+		ActionContext context = ActionContext.getContext();
+		HttpServletRequest request = (HttpServletRequest) context
+				.get(ServletActionContext.HTTP_REQUEST);
+
+		String classValue = request.getParameter("class");
+		String lesson = request.getParameter("lesson");
+
+		RegisterLesson unregisterLesson = new RegisterLesson();
+		unregisterLesson.setClassValue(classValue);
+		unregisterLesson.setUseid("Test");
+		unregisterLesson.setLesson(lesson);
+
+		this.service.unregisterLesson(unregisterLesson);
+
+		return NONE;
+	}
+
+	private String parse2Json() {
+
+		ObjectMapper objectMapper = new ObjectMapper();
+
+		String result = null;
+		try {
+			result = objectMapper.writeValueAsString(lessonMap);
+		} catch (Exception e) {
+			logger.error(e);
+		}
+		return result;
+	}
+
+	private void addLessonMap(RegisterLesson v) {
+		List<String> list = lessonMap.get(v.getClassValue());
+		if (list == null) {
+			list = new ArrayList<String>();
+			lessonMap.put(v.getClassValue(), list);
+		}
+		list.add(v.getLesson());
+	}
+
+	public String getUseid() {
+		return useid;
+	}
+
+	public void setUseid(String useid) {
+		this.useid = useid;
+	}
+
+	public Map<String, List<String>> getLessonMap() {
+		return lessonMap;
+	}
+
+	public void setLessonMap(Map<String, List<String>> lessonMap) {
+		this.lessonMap = lessonMap;
+	}
+
+}

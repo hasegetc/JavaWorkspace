@@ -1987,3 +1987,7 @@ Binding(ALT+SHIFT+ARROW_LEFT,
 !ENTRY org.sf.easyexplore 1 4 2014-04-06 13:22:56.489
 !MESSAGE running: explorer.exe D:\workspace\sanrenxing\com.sinaapp.sanrenxing.web\src\com\sinaapp\sanrenxing\action
 
+
+!ENTRY org.sf.easyexplore 1 4 2014-04-06 13:28:16.572
+!MESSAGE running: explorer.exe D:\workspace\sanrenxing\com.sinaapp.sanrenxing.web\src\com\sinaapp\sanrenxing\action
+
