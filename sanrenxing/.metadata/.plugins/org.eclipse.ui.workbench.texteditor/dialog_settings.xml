@@ -13,16 +13,16 @@
 		<item value="false" key="isRegEx"/>
 		<item value="false" key="incremental"/>
 		<item value="false" key="wholeword"/>
-		<item value="insertUseJoke" key="selection"/>
+		<item value="getJokeIds" key="selection"/>
 		<list key="findhistory">
+			<item value="getJokeIds"/>
+			<item value="ajaxForm"/>
 			<item value="package com.sinaapp.sanrenxing.action;"/>
 			<item value="insertUseJoke"/>
 			<item value="getUseJokeCount"/>
 			<item value="UserMapper"/>
 			<item value="userMapper"/>
 			<item value="MapperFactoryBean"/>
-			<item value="timestamp"/>
-			<item value="MEDIAID"/>
 		</list>
 		<list key="replacehistory">
 		</list>

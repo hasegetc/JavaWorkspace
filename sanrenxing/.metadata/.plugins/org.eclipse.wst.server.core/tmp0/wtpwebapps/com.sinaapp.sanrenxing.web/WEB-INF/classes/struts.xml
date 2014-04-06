@@ -16,9 +16,15 @@
 
 	<package name="sanrenxing" namespace="/" extends="struts-default">
 		<action name="hello" class="com.sinaapp.sanrenxing.action.HelloAction">
-			<result name="success">/pages/hello.jsp</result>
+			<result name="success">/jsp/hello.jsp</result>
 		</action>
 		<action name="demo" class="demoAction">
+		</action>
+		<action name="register" class="registerAction">
+			<!-- <result name="success">/jsp/registerLesson.jsp</result> -->
+		</action>
+		<action name="unregister" class="unregisterAction">
+			<result name="success">/jsp/unregisterLesson.jsp</result>
 		</action>
 		<action name="*" class="sanrenxingAction">
 		</action>

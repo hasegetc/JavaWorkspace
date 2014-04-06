@@ -74,5 +74,4 @@
 	<!-- 加载其他spring配置文件 -->
 	<import resource="/spring-conf/bluemoonBeans.xml"/>
 	
-	
 </beans>

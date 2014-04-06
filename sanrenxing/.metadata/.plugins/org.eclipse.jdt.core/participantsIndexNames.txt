@@ -5,6 +5,8 @@ D:\workspace\sanrenxing\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\27
 \com.sinaapp.sanrenxing.web\src
 D:\workspace\sanrenxing\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3085574610.index
 \oauth2-javaweb-samples\src\main\java
+D:\workspace\sanrenxing\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\165449680.index
+\com.sinaapp.sanrenxing.web\src
 D:\workspace\sanrenxing\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2948432661.index
 \weixin-web\src\main\java
 D:\workspace\sanrenxing\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2906878449.index

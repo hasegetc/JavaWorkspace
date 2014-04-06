@@ -6,5 +6,6 @@
 	<mappers>
 		<mapper resource="com/sinaapp/sanrenxing/dao/demoMapper.xml"/>
 		<mapper resource="com/sinaapp/sanrenxing/dao/jokeMapper.xml"/>
+		<mapper resource="com/sinaapp/sanrenxing/dao/registerMapper.xml"/>
 	</mappers>
 </configuration>

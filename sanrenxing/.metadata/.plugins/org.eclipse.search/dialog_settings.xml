@@ -8,9 +8,9 @@
 	</section>
 	<section name="DialogBounds_SearchDialog">
 		<item value="958" key="DIALOG_WIDTH"/>
-		<item value="117" key="DIALOG_Y_ORIGIN"/>
+		<item value="122" key="DIALOG_Y_ORIGIN"/>
+		<item value="416" key="DIALOG_X_ORIGIN"/>
 		<item value="478" key="DIALOG_HEIGHT"/>
-		<item value="218" key="DIALOG_X_ORIGIN"/>
 		<item value="1|微软雅黑|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|微软雅黑" key="DIALOG_FONT_NAME"/>
 	</section>
 	<section name="Search">
@@ -35,11 +35,11 @@
 			<item value="org.eclipse.pde.internal.ui.search.SearchPage"/>
 		</list>
 	</section>
-	<section name="org.eclipse.search.text.FileSearchResultPage">
-		<item value="1000" key="org.eclipse.search.resultpage.limit"/>
-	</section>
 	<section name="SearchDialog">
 		<item value="org.eclipse.search.internal.ui.text.TextSearchPage" key="PREVIOUS_PAGE"/>
+	</section>
+	<section name="org.eclipse.search.text.FileSearchResultPage">
+		<item value="1000" key="org.eclipse.search.resultpage.limit"/>
 	</section>
 	<section name="TextSearchPage">
 		<item value="false" key="CASE_SENSITIVE"/>
@@ -49,36 +49,24 @@
 		<item value="12" key="HISTORY_SIZE"/>
 		<section name="HISTORY11">
 			<item value="false" key="isRegExSearch"/>
-			<item value="logger" key="textPattern"/>
+			<item value="DemoServiceImpl" key="textPattern"/>
 			<item value="0" key="scope"/>
 			<item value="true" key="ignoreCase"/>
 			<item value="false" key="isWholeWord"/>
 			<list key="fileNamePatterns">
-				<item value="*.java"/>
-			</list>
-			<list key="workingSets">
-			</list>
-		</section>
-		<section name="HISTORY2">
-			<item value="false" key="isRegExSearch"/>
-			<item value="clearUseJoke" key="textPattern"/>
-			<item value="0" key="scope"/>
-			<item value="true" key="ignoreCase"/>
-			<item value="false" key="isWholeWord"/>
-			<list key="fileNamePatterns">
-				<item value="*.java"/>
+				<item value="*.xml"/>
 			</list>
 			<list key="workingSets">
 			</list>
 		</section>
 		<section name="EXTENSIONS">
 			<item value="*.xml" key="2"/>
-			<item value="*" key="1"/>
-			<item value="*.java" key="0"/>
+			<item value="*.java" key="1"/>
+			<item value="*" key="0"/>
 		</section>
-		<section name="HISTORY3">
+		<section name="HISTORY2">
 			<item value="false" key="isRegExSearch"/>
-			<item value="JokeServiceImpl" key="textPattern"/>
+			<item value="pages" key="textPattern"/>
 			<item value="0" key="scope"/>
 			<item value="true" key="ignoreCase"/>
 			<item value="false" key="isWholeWord"/>
@@ -88,7 +76,7 @@
 			<list key="workingSets">
 			</list>
 		</section>
-		<section name="HISTORY0">
+		<section name="HISTORY3">
 			<item value="false" key="isRegExSearch"/>
 			<item value="Method failed" key="textPattern"/>
 			<item value="0" key="scope"/>
@@ -102,42 +90,6 @@
 		</section>
 		<section name="HISTORY10">
 			<item value="false" key="isRegExSearch"/>
-			<item value="DemoService" key="textPattern"/>
-			<item value="0" key="scope"/>
-			<item value="true" key="ignoreCase"/>
-			<item value="false" key="isWholeWord"/>
-			<list key="fileNamePatterns">
-				<item value="*.xml"/>
-			</list>
-			<list key="workingSets">
-			</list>
-		</section>
-		<section name="HISTORY1">
-			<item value="false" key="isRegExSearch"/>
-			<item value="httpRequest" key="textPattern"/>
-			<item value="0" key="scope"/>
-			<item value="true" key="ignoreCase"/>
-			<item value="false" key="isWholeWord"/>
-			<list key="fileNamePatterns">
-				<item value="*.java"/>
-			</list>
-			<list key="workingSets">
-			</list>
-		</section>
-		<section name="HISTORY9">
-			<item value="false" key="isRegExSearch"/>
-			<item value="DemoServiceImpl" key="textPattern"/>
-			<item value="0" key="scope"/>
-			<item value="true" key="ignoreCase"/>
-			<item value="false" key="isWholeWord"/>
-			<list key="fileNamePatterns">
-				<item value="*.xml"/>
-			</list>
-			<list key="workingSets">
-			</list>
-		</section>
-		<section name="HISTORY8">
-			<item value="false" key="isRegExSearch"/>
 			<item value="DemoAction" key="textPattern"/>
 			<item value="0" key="scope"/>
 			<item value="true" key="ignoreCase"/>
@@ -148,31 +100,31 @@
 			<list key="workingSets">
 			</list>
 		</section>
-		<section name="HISTORY5">
-			<item value="false" key="isRegExSearch"/>
-			<item value="jokeDao" key="textPattern"/>
-			<item value="0" key="scope"/>
-			<item value="true" key="ignoreCase"/>
-			<item value="false" key="isWholeWord"/>
-			<list key="fileNamePatterns">
-				<item value="*.xml"/>
-			</list>
-			<list key="workingSets">
-			</list>
-		</section>
-		<section name="HISTORY4">
+		<section name="HISTORY0">
 			<item value="false" key="isRegExSearch"/>
 			<item value="jokeService" key="textPattern"/>
 			<item value="0" key="scope"/>
 			<item value="true" key="ignoreCase"/>
 			<item value="false" key="isWholeWord"/>
 			<list key="fileNamePatterns">
+				<item value="*"/>
+			</list>
+			<list key="workingSets">
+			</list>
+		</section>
+		<section name="HISTORY1">
+			<item value="false" key="isRegExSearch"/>
+			<item value="bluemoonBeans" key="textPattern"/>
+			<item value="0" key="scope"/>
+			<item value="true" key="ignoreCase"/>
+			<item value="false" key="isWholeWord"/>
+			<list key="fileNamePatterns">
 				<item value="*.xml"/>
 			</list>
 			<list key="workingSets">
 			</list>
 		</section>
-		<section name="HISTORY7">
+		<section name="HISTORY9">
 			<item value="false" key="isRegExSearch"/>
 			<item value="SqlSession" key="textPattern"/>
 			<item value="0" key="scope"/>
@@ -184,7 +136,7 @@
 			<list key="workingSets">
 			</list>
 		</section>
-		<section name="HISTORY6">
+		<section name="HISTORY8">
 			<item value="false" key="isRegExSearch"/>
 			<item value="com.sinaapp.sanrenxing.dao" key="textPattern"/>
 			<item value="0" key="scope"/>
@@ -192,6 +144,54 @@
 			<item value="false" key="isWholeWord"/>
 			<list key="fileNamePatterns">
 				<item value="*.xml"/>
+			</list>
+			<list key="workingSets">
+			</list>
+		</section>
+		<section name="HISTORY5">
+			<item value="false" key="isRegExSearch"/>
+			<item value="clearUseJoke" key="textPattern"/>
+			<item value="0" key="scope"/>
+			<item value="true" key="ignoreCase"/>
+			<item value="false" key="isWholeWord"/>
+			<list key="fileNamePatterns">
+				<item value="*.java"/>
+			</list>
+			<list key="workingSets">
+			</list>
+		</section>
+		<section name="HISTORY4">
+			<item value="false" key="isRegExSearch"/>
+			<item value="httpRequest" key="textPattern"/>
+			<item value="0" key="scope"/>
+			<item value="true" key="ignoreCase"/>
+			<item value="false" key="isWholeWord"/>
+			<list key="fileNamePatterns">
+				<item value="*.java"/>
+			</list>
+			<list key="workingSets">
+			</list>
+		</section>
+		<section name="HISTORY7">
+			<item value="false" key="isRegExSearch"/>
+			<item value="jokeDao" key="textPattern"/>
+			<item value="0" key="scope"/>
+			<item value="true" key="ignoreCase"/>
+			<item value="false" key="isWholeWord"/>
+			<list key="fileNamePatterns">
+				<item value="*.xml"/>
+			</list>
+			<list key="workingSets">
+			</list>
+		</section>
+		<section name="HISTORY6">
+			<item value="false" key="isRegExSearch"/>
+			<item value="JokeServiceImpl" key="textPattern"/>
+			<item value="0" key="scope"/>
+			<item value="true" key="ignoreCase"/>
+			<item value="false" key="isWholeWord"/>
+			<list key="fileNamePatterns">
+				<item value="*"/>
 			</list>
 			<list key="workingSets">
 			</list>
