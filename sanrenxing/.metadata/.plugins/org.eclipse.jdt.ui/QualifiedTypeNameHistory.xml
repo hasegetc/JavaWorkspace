@@ -50,4 +50,5 @@
 <fullyQualifiedTypeName name="org.apache.http.HttpStatus"/>
 <fullyQualifiedTypeName name="com.sinaapp.sanrenxing.bean.RegisterLesson"/>
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="com.sinaapp.sanrenxing.bean.RequestLesson"/>
 </qualifiedTypeNameHistroy>

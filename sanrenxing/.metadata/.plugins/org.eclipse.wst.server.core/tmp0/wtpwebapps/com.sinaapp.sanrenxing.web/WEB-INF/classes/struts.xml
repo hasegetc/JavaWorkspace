@@ -23,6 +23,9 @@
 		<action name="register" class="registerAction">
 			<!-- <result name="success">/jsp/registerLesson.jsp</result> -->
 		</action>
+		<action name="request" class="requestAction">
+			<!-- <result name="success">/jsp/registerLesson.jsp</result> -->
+		</action>
 		<action name="unregister" class="unregisterAction">
 			<result name="success">/jsp/unregisterLesson.jsp</result>
 		</action>
