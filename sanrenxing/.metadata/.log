@@ -1983,3 +1983,7 @@ Binding(ALT+SHIFT+ARROW_LEFT,
 
 !ENTRY org.eclipse.wst.server.core 4 0 2014-04-06 13:12:06.459
 !MESSAGE Server Tomcat v7.0 Server at localhost failed to start.
+
+!ENTRY org.sf.easyexplore 1 4 2014-04-06 13:22:56.489
+!MESSAGE running: explorer.exe D:\workspace\sanrenxing\com.sinaapp.sanrenxing.web\src\com\sinaapp\sanrenxing\action
+
