@@ -1,0 +1,171 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<title>注销服务</title>
+
+<script type="text/javascript" src="./jQuery/jquery.min.js"></script>
+<script type="text/javascript" src="./jQueryPlugin/jquery.form.js"></script>
+<link href="sanrenxingCSS/sanrenxing.css" rel="stylesheet"
+	type="text/css">
+
+
+<script type="text/javascript">
+	// 科目键值对
+	var lessonName = {
+		'math' : '数学',
+		'physical' : "物理",
+		'chemistry' : "化学",
+		'english' : "英语",
+		'biological' : "生物"
+	};
+
+	// 页面返回map值
+	var result = '${sessionScope.result}';
+	var jsonResult = eval("(" + result + ")");
+
+	$(document).ready(function() {
+		
+		$('#js_unregisterSelectBtn').click(function() {
+			$("#js_unregisterSelectBtn").attr("disabled", true);
+			$('#js_unregisterSelectBtn').removeClass("btn_primary");
+			$('#unregisterForm').ajaxForm(success(this));
+			//return  false;不需要加  
+
+		});
+
+		$('#js_unregisterAllBtn').click(function() {
+
+			$('.lesson').last().remove(); // remove the last element
+			var num = $('.lesson').size();
+			// if only one element remains, disable the "remove" button
+			if (num == 1) {
+				$('#js_delLessonBtn').attr('disabled', true);
+				$('#js_delLessonBtn').removeClass("btn_primary");
+			}
+		});
+
+		$("#class").change(function() {
+			setLesson();
+		});
+
+		// 初始化课程下拉列表 
+		setLesson();
+
+	});
+</script>
+
+
+<script type="text/javascript">
+	function setLesson(lesson) {
+		// 初始化课程值
+		var key = $(".class").val();
+		var lesson = jsonResult[key];
+		$("#lesson").empty();
+		$.each(lesson, function(key, val) {
+			$("#lesson")
+					.append(
+							"<option value=" + val +">" + lessonName[val]
+									+ "</option>");
+		});
+
+	}
+
+	function success(select) {
+		alert("注销成功，请继续！");
+		$(select).removeAttr("disabled");
+		$(select).addClass("btn_primary");
+	}
+</script>
+
+
+
+
+</head>
+<body>
+
+	<div class="head" id="header">
+		<div class="head_box">
+			<div class="inner wrp">
+				<h1 class="logo">
+					<a href="/" title="微信公众平台"></a>
+				</h1>
+				<div class="account">
+					<div class="account_meta account_faq" style="display: none;">
+						<a class="account_primary_link"
+							href="http://crm2.qq.com/page/portalpage/wpa.php?uin=40012345&amp;f=1&amp;ty=1&amp;ap=000011:400792:|m:12|f:400792:m:12"
+							target="_blank">在线客服</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div id="body" class="body">
+		<form id="unregisterForm" action="unregister!unregisterLesson.action">
+
+			<div id="class" class="frm_ctl_group">
+				<span class="frm_label">年级：</span> <select name="class" id="class"
+					class="frm_input_box class">
+
+					<s:iterator value="lessonMap">
+						<option value=<s:property value="key" />>
+							<s:if test='key=="primary"'>小学</s:if>
+							<s:elseif test='key=="junior"'>初中</s:elseif>
+							<s:elseif test='key=="senior"'>高中</s:elseif>
+						</option>
+					</s:iterator>
+
+				</select>
+
+			</div>
+
+			<div class="frm_ctl_group lesson">
+				<span class="frm_label">科目：</span> <select name="lesson" id="lesson"
+					class="frm_input_box">
+				</select>
+			</div>
+
+			<div class="clear"></div>
+			<div class="tool_bar border with_form">
+				<button type="button" id="js_unregisterSelectBtn"
+					class="btn_disabled btn_primary btn">注销选择</button>
+				<button type="button" id="js_unregisterAllBtn"
+					class="btn_disabled  btn btn_primary">注销所有</button>
+<input type="submit" value="Submit" />
+			</div>
+
+		</form>
+
+	</div>
+	<div class="foot" id="footer">
+		<ul class="links ft">
+			<li class="links_item no_extra"><a
+				href="http://www.tencent.com/zh-cn/index.shtml" target="_blank">关于腾讯</a>
+			</li>
+			<li class="links_item"><a
+				href="/cgi-bin/readtemplate?t=home/agreement_tmpl&amp;type=info&amp;lang=zh_CN&amp;token="
+				target="_blank">服务协议</a></li>
+			<li class="links_item"><a
+				href="http://kf.qq.com/product/weixinmp.html" target="_blank">客服中心</a>
+			</li>
+			<li class="links_item"><a
+				href="http://crm2.qq.com/page/portalpage/wpa.php?uin=40012345&amp;f=1&amp;ty=1&amp;ap=000011:400792:|m:12|f:400792:m:12"
+				target="_blank">在线客服</a></li>
+			<li class="links_item"><a href="mailto:weixinmp@qq.com"
+				target="_blank">联系邮箱</a></li>
+			<li class="links_item"><a
+				href="/cgi-bin/readtemplate?t=home/infringement_tmpl&amp;lang=zh_CN"
+				target="_blank">侵权投诉</a></li>
+		</ul>
+		<p class="copyright">Copyright © 2012-2014 Tencent. All Rights
+			Reserved.</p>
+	</div>
+
+
+</body>
+
+</html>

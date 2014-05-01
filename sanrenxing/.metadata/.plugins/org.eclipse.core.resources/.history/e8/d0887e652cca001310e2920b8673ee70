@@ -1,0 +1,36 @@
+package com.sinaapp.sanrenxing.util;
+
+import com.qq.weixin.sdk.consts.IMessageConsts;
+import com.qq.weixin.sdk.message.receive.ReceivedMessage;
+import com.qq.weixin.sdk.message.receive.event.MeunEvent;
+import com.sinaapp.sanrenxing.messagehandle.MenuEventHandle;
+
+public class ForwardUtil {
+
+
+	// if (receivedMessage.getMsgType().equalsIgnoreCase(
+	// IMessageConsts.MESSAGE_IMAGE)) {
+	// response = handlePicMessage(receivedMessage);
+	// } else if (receivedMessage.getMsgType().equalsIgnoreCase(
+	// IMessageConsts.MESSAGE_VOICE)) {
+	// response = handVoiceMessage(receivedMessage);
+	// } else if (receivedMessage.getMsgType().equalsIgnoreCase(
+	// IMessageConsts.MESSAGE_EVENT)) {
+	// MenuEventHandle.handle((MeunEvent) receivedMessage);
+	// } else {
+	// response = handTextMessage(receivedMessage);
+	// }
+	
+	public static void forwardNotice(String response,
+			ReceivedMessage receivedMessage) {
+
+		postCustomMsg(response);
+	}
+
+	private static void postCustomMsg(String response) {
+		if (response != null) {
+			CustomMsgUtil.postCustomMsg(response);
+		}
+	}
+
+}

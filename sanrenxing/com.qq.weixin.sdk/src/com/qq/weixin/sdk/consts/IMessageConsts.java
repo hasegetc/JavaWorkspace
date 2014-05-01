@@ -23,6 +23,7 @@ public interface IMessageConsts {
 															// MESSAGE_TEXT
 
 	// event types
+	public static final String EVENT_VIEW = "VIEW";
 	public static final String EVENT_CLICK = "CLICK";
 	public static final String EVENT_SUBSCRIBE = "subscribe";
 	public static final String EVENT_UNSUBSCRIBE = "unsubscribe";

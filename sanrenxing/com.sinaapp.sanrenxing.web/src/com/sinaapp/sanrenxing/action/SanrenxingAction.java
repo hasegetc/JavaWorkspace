@@ -20,7 +20,8 @@ import com.qq.weixin.sdk.message.receive.ReceivedMessage;
 import com.sinaapp.sanrenxing.consts.ISanrenxingConsts;
 import com.sinaapp.sanrenxing.job.BlueMoonJob;
 import com.sinaapp.sanrenxing.job.SanrenxingJob;
-import com.sinaapp.sanrenxing.util.WeixinUtil;
+import com.sinaapp.sanrenxing.util.MessageUtil;
+import com.sinaapp.sanrenxing.util.SignatureUtil;
 
 @Component
 @Scope("prototype")
@@ -55,11 +56,11 @@ public class SanrenxingAction extends ActionSupport implements
 		String signature = request.getParameter("signature");
 		String nonce = request.getParameter("nonce");
 		String timestamp = request.getParameter("timestamp");
-		boolean isSanrenxing = WeixinUtil.checkSignature(signature, timestamp,
+		boolean isSanrenxing = SignatureUtil.checkSignature(signature, timestamp,
 				nonce, ISanrenxingConsts.APP_Token);
-		boolean isSanrenxingService = WeixinUtil.checkSignature(signature,
+		boolean isSanrenxingService = SignatureUtil.checkSignature(signature,
 				timestamp, nonce, ISanrenxingConsts.SERVICE_APP_TOKEN);
-		boolean isBluemoon = WeixinUtil.checkSignature(signature, timestamp,
+		boolean isBluemoon = SignatureUtil.checkSignature(signature, timestamp,
 				nonce, ISanrenxingConsts.BLUEMOON_APP_TOKEN);
 
 		if (signature != null
@@ -128,6 +129,6 @@ public class SanrenxingAction extends ActionSupport implements
 			logger.error("root is null");
 			return null;
 		}
-		return WeixinUtil.getMessage(root);
+		return MessageUtil.getMessage(root);
 	}
 }

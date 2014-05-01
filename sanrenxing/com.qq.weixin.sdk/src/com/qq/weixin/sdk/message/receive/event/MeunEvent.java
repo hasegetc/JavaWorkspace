@@ -2,6 +2,8 @@ package com.qq.weixin.sdk.message.receive.event;
 
 import org.dom4j.Element;
 
+import com.qq.weixin.sdk.consts.IMessageConsts;
+
 public class MeunEvent extends AbstractEvent {
 
 	private String eventKey;
@@ -16,7 +18,7 @@ public class MeunEvent extends AbstractEvent {
 
 	public MeunEvent(Element root) {
 		super(root);
-		// TODO Auto-generated constructor stub
+		this.eventKey = root.element(IMessageConsts.TAG_EVENTKEY).getText();
 	}
 
 }

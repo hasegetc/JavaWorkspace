@@ -3,28 +3,32 @@
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
 		<item value="273" key="DIALOG_WIDTH"/>
 		<item value="145" key="DIALOG_Y_ORIGIN"/>
-		<item value="1075" key="DIALOG_X_ORIGIN"/>
 		<item value="399" key="DIALOG_HEIGHT"/>
+		<item value="1075" key="DIALOG_X_ORIGIN"/>
 		<item value="1|微软雅黑|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|微软雅黑" key="DIALOG_FONT_NAME"/>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="true" key="wrap"/>
-		<item value="false" key="casesensitive"/>
 		<item value="false" key="isRegEx"/>
+		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="false" key="wholeword"/>
-		<item value="getJokeIds" key="selection"/>
+		<item value="synchronized" key="selection"/>
 		<list key="findhistory">
-			<item value="getJokeIds"/>
-			<item value="ajaxForm"/>
-			<item value="package com.sinaapp.sanrenxing.action;"/>
-			<item value="insertUseJoke"/>
-			<item value="getUseJokeCount"/>
-			<item value="UserMapper"/>
-			<item value="userMapper"/>
-			<item value="MapperFactoryBean"/>
+			<item value="synchronized"/>
+			<item value="volatile"/>
+			<item value="vali"/>
+			<item value="teacherMap"/>
+			<item value="scope"/>
+			<item value="getEvent"/>
+			<item value="birthdays"/>
+			<item value="PostMethod "/>
 		</list>
 		<list key="replacehistory">
 		</list>
+	</section>
+	<section name="org.eclipse.ui.texteditor.GotoLineAction$GotoLineDialog_dialogBounds">
+		<item value="234" key="DIALOG_Y_ORIGIN"/>
+		<item value="452" key="DIALOG_X_ORIGIN"/>
 	</section>
 </section>

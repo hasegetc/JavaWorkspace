@@ -1,0 +1,28 @@
+1397964937336	Rename method 'httpRequest'
+1397964945317	Rename method 'Post'
+1397965555794	Rename field 'POST_URL'
+1397965568026	Rename field 'CUSTOM_MESSAGE_POST_URL'
+1397965680364	Rename local variable 'requestUrl'
+1397966555545	Rename method 'post'
+1397966566480	Rename method 'post'
+1397967290829	Rename method 'httpPost'
+1397968519314	Rename local variable 'requestUrl'
+1397973438834	Rename type 'WeixinUtil'
+1398055221087	Copy file
+1398055280688	Copy compilation unit
+1398055304825	Copy compilation unit
+1398055425742	Copy compilation unit
+1398055534133	Copy compilation unit
+1398055616413	Rename field 'jokeService'
+1398056908858	Copy file
+1398090942252	Rename local variable 'fromUserName'
+1398091394883	Extract local variable 'relation'
+1398098724195	Rename method 'isFromTeacher'
+1398178337225	Extract method 'getPicMsg'
+1398178466471	Extract method 'getVoiceMsg'
+1398178539418	Extract method 'getTextMsg'
+1398179191063	Rename local variable 'resutl'
+1398185563944	Rename field 'USE_PREV_SERVICE'
+1398185627821	Rename method 'usePrevService'
+1398262005171	Delete element
+1398267328570	Delete element

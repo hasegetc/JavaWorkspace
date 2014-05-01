@@ -1,0 +1,77 @@
+package com.sinaapp.sanrenxing.util;
+
+import java.util.List;
+import java.util.Map.Entry;
+
+import javax.servlet.ServletContext;
+
+import org.apache.log4j.Logger;
+import org.apache.struts2.ServletActionContext;
+import org.springframework.context.ApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
+
+import com.sinaapp.sanrenxing.bean.RegisterLesson;
+import com.sinaapp.sanrenxing.bean.Relation;
+import com.sinaapp.sanrenxing.job.SanrenxingJob;
+import com.sinaapp.sanrenxing.service.impl.SanrenxingServiceImpl;
+
+public class SanrenxingUtil {
+
+	private static Logger logger = Logger.getLogger(SanrenxingUtil.class);;
+
+	public static String getToUserName(String fromUserName) {
+		return getService().getToUserName(fromUserName);
+	}
+
+	private static SanrenxingServiceImpl getService() {
+
+		ServletContext application = ServletActionContext.getRequest()
+				.getSession().getServletContext();
+		ApplicationContext context = WebApplicationContextUtils
+				.getWebApplicationContext(application);
+
+		SanrenxingServiceImpl service = (SanrenxingServiceImpl) context
+				.getBean("sanrenxingService");
+		return service;
+	}
+
+	public static RegisterLesson getLesson(String userName) {
+		return getService().getLesson(userName);
+	}
+
+	public static List<String> getTeachers(String classValue, String lessonValue) {
+		return getService().getTeachers(classValue, lessonValue);
+	}
+
+	/**
+	 * 得到所有正在转发中的老师
+	 */
+	public static List<String> getForwardTeachers() {
+		return getService().getForwardTeachers();
+	}
+
+	public static void stopService(String userName) {
+		getService().stopService(userName);
+	}
+
+	public static void usePrevLesson(String userName) {
+		getService().usePrevService(userName);
+	}
+
+	public static void startService(String tearchName) {
+
+		String studentName = SanrenxingJob.teacherMap.get(tearchName);
+		Relation relation = new Relation();
+		relation.setTeacherId(tearchName);
+		relation.setStudentId(studentName);
+		relation.setStatus(1);
+		relation.setTimestamp(Long.toString(DateUtil.getTimestamp()));
+		relation.setDate(DateUtil.getStringDate());
+		getService().startService(relation);
+		for (Entry<String, String> v : SanrenxingJob.teacherMap.entrySet()) {
+			if (v.getValue().equalsIgnoreCase(studentName)) {
+				SanrenxingJob.teacherMap.remove(v.getKey());
+			}
+		}
+	}
+}

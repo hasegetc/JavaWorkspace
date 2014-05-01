@@ -1,0 +1,249 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+
+		<script type="text/javascript" src="./jQuery/jquery.min.js"></script>
+		<script type="text/javascript" src="./jQueryPlugin/jquery.textRemindAuto.js"></script>
+
+		<script language="Javascript" type="text/javascript" src="./jQueryPlugin/lwtCountdown/js/jquery.lwtCountdown-1.0.js"></script>
+		<script language="Javascript" type="text/javascript" src="./jQueryPlugin/lwtCountdown/js/misc.js"></script>
+		<link rel="Stylesheet" type="text/css" href="./jQueryPlugin/lwtCountdown/style/main.css"></link>
+
+		<link href="qianMengCSS/qianMeng.css" rel="stylesheet" type="text/css"> 
+
+
+		<script type="text/javascript">
+
+			var today = new Date();
+			function helloworld(){
+
+				var time = today.getFullYear() + "年" + parseInt(parseInt(today.getMonth()) + 1 )  + "月" + today.getDate() + "日";
+				var result = time;
+				var h=today.getHours();
+				var m=today.getMinutes();
+				var s=today.getSeconds();
+
+				result += h + "时" + m + "分" + s + "秒";
+
+				alert(result);
+
+			}
+
+			function scrollDiv(obj, options) {
+
+				if(!options) var options={};  
+
+				speed=options.speed?parseInt(options.speed,10):1000 ; //卷动速度，数值越大，速度越慢（毫秒）
+
+				var _this = $(obj).find("p:first");
+
+				upHeight = 0 - $(_this).height();  
+
+				_this.animate({  
+					marginTop:upHeight,  
+				},speed,function(){  
+					_this.appendTo($(this).parent());  
+					_this.css({marginTop:20});  
+
+					// 下一个显示出来，将其他的隐藏  
+					//  _this.hide();  
+					//  scrollDiv.find("p:first").show();  `
+				});  
+
+
+			}
+
+		</script>
+
+
+		<script>  
+			$(document).ready(function(){  
+
+				$("#text_scroll_first").hover(function(){
+					clearInterval(timerid);  
+					},function(){ 
+
+					timerid=setInterval("scrollDiv('#text_scroll_first', {speed : 2000 })",3000); 
+				}
+
+				).mouseout(); 
+
+				$("#text_scroll_second").hover(function(){
+					clearInterval(timeridTest);  
+					},function(){ 
+
+					timeridTest=setInterval("scrollDiv('#text_scroll_second', {speed : 2000 })",3000); 
+				}
+
+				).mouseout(); 
+
+			});
+
+			$(document).ready(function(){  
+
+				$(".textarea_style").textRemindAuto();
+
+			});
+
+
+
+		</script>  
+
+	</head>
+
+	<body>
+		<div id = "qian_meng_main">
+
+
+
+			<div id="container">
+
+				<div id="countdown_dashboard">
+
+
+					<div style = "float:left;margin-top:45px">
+						从您打开网站开始，</br>您的生命已经流逝了如下时间：
+						</div>
+
+					<div class="dash weeks_dash">
+						<span class="dash_title">weeks</span>
+						<div class="digit">0</div>
+						<div class="digit">0</div>
+					</div>
+
+					<div class="dash days_dash">
+						<span class="dash_title">days</span>
+						<div class="digit">0</div>
+						<div class="digit">0</div>
+					</div>
+
+					<div class="dash hours_dash">
+						<span class="dash_title">hours</span>
+						<div class="digit">0</div>
+						<div class="digit">0</div>
+					</div>
+
+					<div class="dash minutes_dash">
+						<span class="dash_title">minutes</span>
+						<div class="digit">0</div>
+						<div class="digit">0</div>
+					</div>
+
+					<div class="dash seconds_dash" style = "text-align:center">
+						<span class="dash_title">seconds</span>
+						<div class="digit">0</div>
+						<div class="digit">0</div>
+					</div>
+
+				</div>
+
+
+				<script language="javascript" type="text/javascript">
+					jQuery(document).ready(function() {
+						$('#countdown_dashboard').countDown({
+							targetDate: {
+								'day': 		10,
+								'month': 	1,
+								'year': 	2013,
+								'hour': 	11,
+								'min': 		0,
+								'sec': 		0
+							}
+						});
+
+						$('#email_field').focus(email_focus).blur(email_blur);
+						$('#subscribe_form').bind('submit', function() { return false; });
+					});
+				</script>
+
+			</div>
+			<div class="qian_meng_content">
+				<div class="qian_meng_notice">请记下今天所做过的最重要的事：</div>
+				<div>
+					<div class="textarea_style"><textarea name="" cols="" rows="" class="textarea_style">聚焦于最重要的事情上面</textarea></div>
+
+					<div id = "text_scroll_first" class = "text_scroll">
+						<p class = "qian_meng_warning" >
+
+
+						“如果今天是我生命中的最后一天，你会不会完成你今天想做的事情呢？”当答案连续很多次被给予“不是”的时候，我知道自己需要改变某些事情了
+						“记住你即将死去”是我一生中遇到的最重要箴言。它帮我指明了生命中重要的选择。因为几乎所有的事情, 包括所有的荣誉、所有的骄傲、所有对难堪和失败的恐惧,
+						这些在死亡面前都会消失。我看到的是留下的真正重要的东西。你有时候会思考你将会失去某些东西, “记住你即将死去”是我知道的避免这些想法的最好办法。你已经赤身裸体了，你没有理由不去跟随自己内心的声音。
+
+						</p>
+
+						<p class = "qian_meng_warning" p>你的工作将填满你的一大块人生，唯一获得真正满足的方法就是做你相信是伟大的工作，而唯一做伟大工作的方法是爱你所做的事。如果你还没找到这些事，继续找，别停顿。尽你全心全力，你知道你一定会找到。而且，如同任何伟大的关系，事情只会随着时间愈来愈好。所以，在你找到之前，继续找，别停顿</p>  
+						<p class = "qian_meng_warning" p>没有人愿意死, 即使人们想上天堂，人们也不会为了去那里而死。（笑）但是死亡是我们每个人共同的终点。从来没有人能够逃脱它，也应该如此。 因为死亡就是生命中最好的一个发明。它将旧的清除以便给新的让路。你们现在是新的，但是从现在开始不久以后，你们将会逐渐的变成旧的然后被清除。我很抱歉这很具有戏剧性, 但是这十分的真实</p>  
+						<p class = "qian_meng_warning" p>你们的时间很有限，所以不要将他们浪费在重复其他人的生活上。不要被教条束缚，那意味着你和其他人思考的结果一起生活。不要被其他人喧嚣的观点掩盖你真正的内心的声音。还有最重要的是，你要有勇气去听从你直觉和心灵的指示——它们在某种程度上知道你想要成为什么样子，所有其他的事情都是次要的</p>  
+						<p class = "qian_meng_warning" p>当我年轻的时候，有一本叫做“整个地球的目录”振聋发聩的杂志，它是我们那一代人的圣经之一。它是一个叫Stewart Brand的家伙在离这里不远的Menlo Park书写的，他象诗一般神奇地将这本书带到了这个世界。那是六十年代后期，在个人电脑出现之前，所以这本书全部是用打字机、剪刀还有偏光镜制作的。有点像用软皮包装的google，在google出现三十五年之前：这是理想主义的，其中有许多灵巧的工具和伟大的想法</p>  
+						<p>Stewart和他的伙伴出版了几期的“整个地球的目录”，当它完成了自己使命的时候，他们做出了最后一期的目录。那是在七十年代的中期，你们的时代。在最后一期的封底上是清晨乡村公路的照片，如果你有冒险精神的话，你可以自己找到这条路的。在照片之下有这样一段话：“求知若飢，虛心若愚。”这是他们停刊的告别语。“求知若飢，虛心若愚。”我总是希望自己能够那样，现在，在你们即将毕业，开始新的旅程的时候, 我也希望你们能做到这样</p>  
+
+
+
+
+
+					</div>
+				</div>
+
+			</div>
+
+			<div class="qian_meng_content">
+				<div class="qian_meng_notice">请记下明天要做的最重要的事：</div>
+
+				<div>
+					<div class="textarea_style"><textarea name="" cols="" rows="" class="textarea_style">请聚焦于最重要的事情上面</textarea></div>
+
+
+
+
+
+
+					<div id = "text_scroll_second" class = "text_scroll">
+						<p class = "qian_meng_warning" >
+
+
+						“如果今天是我生命中的最后一天，你会不会完成你今天想做的事情呢？”当答案连续很多次被给予“不是”的时候，我知道自己需要改变某些事情了
+						“记住你即将死去”是我一生中遇到的最重要箴言。它帮我指明了生命中重要的选择。因为几乎所有的事情, 包括所有的荣誉、所有的骄傲、所有对难堪和失败的恐惧,
+						这些在死亡面前都会消失。我看到的是留下的真正重要的东西。你有时候会思考你将会失去某些东西, “记住你即将死去”是我知道的避免这些想法的最好办法。你已经赤身裸体了，你没有理由不去跟随自己内心的声音。
+
+						</p>
+
+						<p class = "qian_meng_warning" p>你的工作将填满你的一大块人生，唯一获得真正满足的方法就是做你相信是伟大的工作，而唯一做伟大工作的方法是爱你所做的事。如果你还没找到这些事，继续找，别停顿。尽你全心全力，你知道你一定会找到。而且，如同任何伟大的关系，事情只会随着时间愈来愈好。所以，在你找到之前，继续找，别停顿</p>  
+						<p class = "qian_meng_warning" p>没有人愿意死, 即使人们想上天堂，人们也不会为了去那里而死。（笑）但是死亡是我们每个人共同的终点。从来没有人能够逃脱它，也应该如此。 因为死亡就是生命中最好的一个发明。它将旧的清除以便给新的让路。你们现在是新的，但是从现在开始不久以后，你们将会逐渐的变成旧的然后被清除。我很抱歉这很具有戏剧性, 但是这十分的真实</p>  
+						<p class = "qian_meng_warning" p>你们的时间很有限，所以不要将他们浪费在重复其他人的生活上。不要被教条束缚，那意味着你和其他人思考的结果一起生活。不要被其他人喧嚣的观点掩盖你真正的内心的声音。还有最重要的是，你要有勇气去听从你直觉和心灵的指示——它们在某种程度上知道你想要成为什么样子，所有其他的事情都是次要的</p>  
+						<p class = "qian_meng_warning" p>当我年轻的时候，有一本叫做“整个地球的目录”振聋发聩的杂志，它是我们那一代人的圣经之一。它是一个叫Stewart Brand的家伙在离这里不远的Menlo Park书写的，他象诗一般神奇地将这本书带到了这个世界。那是六十年代后期，在个人电脑出现之前，所以这本书全部是用打字机、剪刀还有偏光镜制作的。有点像用软皮包装的google，在google出现三十五年之前：这是理想主义的，其中有许多灵巧的工具和伟大的想法</p>  
+						<p class = "qian_meng_warning" p>Stewart和他的伙伴出版了几期的“整个地球的目录”，当它完成了自己使命的时候，他们做出了最后一期的目录。那是在七十年代的中期，你们的时代。在最后一期的封底上是清晨乡村公路的照片，如果你有冒险精神的话，你可以自己找到这条路的。在照片之下有这样一段话：“求知若飢，虛心若愚。”这是他们停刊的告别语。“求知若飢，虛心若愚。”我总是希望自己能够那样，现在，在你们即将毕业，开始新的旅程的时候, 我也希望你们能做到这样</p>  
+
+
+
+
+
+					</div>
+
+
+
+				</div>
+
+
+
+
+
+
+			</div>
+
+
+
+			<input id = "submit" type="button"  onclick = "helloworld()" />
+
+
+		</div>
+
+
+
+	</body>
+</html>
+

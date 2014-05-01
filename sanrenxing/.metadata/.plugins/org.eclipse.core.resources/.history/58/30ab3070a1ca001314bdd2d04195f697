@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sinaapp.sanrenxing.dao.JokeDao">
+
+
+	<select id="getToUserName" parameterType="String"
+		resultType="com.sinaapp.sanrenxing.bean.Relation">
+		select teacher_id as teacherId, student_id as studentId,
+		on_service as onService,
+		timestamp as timestamp ,date as date from
+		relation where (teacher_id = #{fromUserName}
+		or student_id =
+		#{fromUserName} )and
+		on_service = 1
+	</select>
+
+	<update id="stopRelation" parameterType="String">
+		update relation set
+		on_service = 0 where teacher_id = #{userName} or
+		student_id =
+		#{userName}
+	</update>
+
+	<update id="usePrevService" parameterType="String">
+		update relation set
+		on_service = 0 where teacher_id = #{userName} or
+		student_id =
+		#{userName}
+	</update>
+
+	
+	<select id="getLesson" parameterType="String"
+		resultType="com.sinaapp.sanrenxing.bean.RegisterLesson">
+		select use_id as useid,class as classValue,lesson,timestamp,date,status 
+		from request_lesson where use_id = #{userName} and status = 1;
+	</select>
+
+	<select id="getTeachers" resultType="String">
+		Select use_id From register_lesson where class = #{classValue} and lesson = #{lessonValue};
+	</select>
+
+	<select id="getForwardTeachers">
+		Select teacher_id From relation where status = 1;
+	</select>
+
+	
+
+</mapper>

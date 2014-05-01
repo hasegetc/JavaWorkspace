@@ -1,0 +1,139 @@
+package com.sinaapp.sanrenxing.bean;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map.Entry;
+
+/**
+ * { "button":[ { "type":"click", "name":"今日歌曲", "key":"V1001_TODAY_MUSIC" }, {
+ * "type":"click", "name":"歌手简介", "key":"V1001_TODAY_SINGER" }, { "name":"菜单",
+ * "sub_button":[ { "type":"view", "name":"搜索", "url":"http://www.soso.com/" },
+ * { "type":"view", "name":"视频", "url":"http://v.qq.com/" }, { "type":"click",
+ * "name":"赞一下我们", "key":"V1001_GOOD" }] }] }
+ * 
+ * @author LiuYuchao
+ * 
+ */
+public class CustomMenu {
+
+	private CustomMenuData data = new CustomMenuData(new HashMap<String, List<Menu>>());
+
+	public CustomMenu() {
+		initCustomMenu();
+	}
+
+	private void initCustomMenu() {
+
+		/**
+		 * firstMenu = { "name":"服务", "sub_button":[ { "type":"view",
+		 * "name":"申请辅导", "url":"http://www.soso.com/" }, { "type":"view",
+		 * "name":"注册服务", "url":"http://v.qq.com/" }, { "type":"view",
+		 * "name":"注消服务", "url":"http://v.qq.com/" }] }
+		 */
+		// 第一個菜单
+		data.firstMenu = new ArrayList<Menu>();
+
+		Menu menu = new ViewMenu();
+		menu.setName("使用前一辅导");
+		menu.setType(Menu.VIEW);
+		((ViewMenu) menu).setUrl("http://v.qq.com/");
+		data.firstMenu.add(menu);
+
+		menu = new ViewMenu();
+		menu.setName("注册服务");
+		menu.setType(Menu.VIEW);
+		((ViewMenu) menu).setUrl("http://v.qq.com/");
+		data.firstMenu.add(menu);
+
+		menu = new ViewMenu();
+		menu.setType(Menu.VIEW);
+		((ViewMenu) menu).setUrl("http://v.qq.com/");
+		menu.setName("注消服务");
+		data.firstMenu.add(menu);
+
+		data.menuMap.put("服务", data.firstMenu);
+
+		/**
+		 * 第二个菜单 secondMenu = { "type":"click", "name":"歌手简介",
+		 * "key":"V1001_TODAY_SINGER" }
+		 */
+
+		data.secondMenu = new ArrayList<Menu>();
+
+		menu = new ClickMenu();
+		menu.setName("结束辅导");
+		menu.setType(Menu.CLICK);
+		((ClickMenu) menu).setKey("http://v.qq.com/");
+		data.secondMenu.add(menu);
+		/**
+		 * 默认只有一个菜单即为一级菜单
+		 */
+		data.menuMap.put("结束辅导", data.secondMenu);
+		
+
+		/**
+		 * 第三个菜单
+		 */
+		data.thirdMenu = new ArrayList<Menu>();
+		menu = new ClickMenu();
+		menu.setName("申请辅导");
+		menu.setType(Menu.CLICK);
+		((ClickMenu) menu).setKey("http://v.qq.com/");
+		data.thirdMenu.add(menu);
+		/**
+		 * 默认只有一个菜单即为一级菜单
+		 */
+		data.menuMap.put("申请辅导", data.thirdMenu);
+		
+	}
+
+	public String getMenuJson()
+	{
+		if(data.menuMap == null)
+		{
+			return null;
+		}
+		
+		for (Entry<String, List<Menu>> i : data.menuMap.entrySet()) {
+			List<Menu> value = i.getValue();
+			if(value.size() == 1)
+			{
+				// 默认只有一个菜单即为一级菜单
+				
+			}
+		}
+		String result = null;
+		return result ;
+	}
+	
+	class ClickMenu extends Menu {
+		// { "type":"click", "name":"今日歌曲", "key":"V1001_TODAY_MUSIC" }
+
+		private String key;
+
+		public String getKey() {
+			return key;
+		}
+
+		public void setKey(String key) {
+			this.key = key;
+		}
+
+	}
+
+	class ViewMenu extends Menu {
+		// { "type":"view", "name":"视频", "url":"http://v.qq.com/" }
+
+		private String url;
+
+		public String getUrl() {
+			return url;
+		}
+
+		public void setUrl(String url) {
+			this.url = url;
+		}
+
+	}
+}

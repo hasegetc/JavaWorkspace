@@ -1,0 +1,63 @@
+package com.sinaapp.sanrenxing.util;
+
+import java.util.List;
+
+import javax.servlet.ServletContext;
+
+import org.apache.log4j.Logger;
+import org.apache.struts2.ServletActionContext;
+import org.springframework.context.ApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
+
+import com.sinaapp.sanrenxing.bean.RegisterLesson;
+import com.sinaapp.sanrenxing.service.impl.SanrenxingServiceImpl;
+
+public class SanrenxingUtil {
+
+	private static Logger logger = Logger.getLogger(SanrenxingUtil.class);;
+	private static List<Integer> jokeIds;
+	private static List<Integer> useJokeId;
+
+	public static String getToUserName(String fromUserName) {
+		return getService().getToUserName(fromUserName);
+	}
+
+	private static SanrenxingServiceImpl getService() {
+
+		ServletContext application = ServletActionContext.getRequest()
+				.getSession().getServletContext();
+		ApplicationContext context = WebApplicationContextUtils
+				.getWebApplicationContext(application);
+
+		SanrenxingServiceImpl service = (SanrenxingServiceImpl) context
+				.getBean("sanrenxingService");
+		return service;
+	}
+
+	// private static void save2DB(int id, String title, String joke) {
+	// System.out.println("开始执行插入数据。。。");
+	// Map map = new HashMap();
+	// map.put("id", id);
+	// map.put("title", title);
+	// map.put("joke", joke);
+	//
+	// service.insert(map);
+	// System.out.println("插入数据成功：" + map);
+	// }
+
+	public static RegisterLesson getLesson(String userName) {
+		return getService().getLesson(userName);
+	}
+
+	public static List<String> getTeachers(String classValue, String lessonValue) {
+		return getService().getTeachers(classValue, lessonValue);
+	}
+
+	/**
+	 * 得到所有正在转发中的老师
+	 */
+	public static void getForwardTeachers() {
+		return getService().getTeachers(classValue, lessonValue);
+	}
+
+}

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;TestJackson.java&apos; to &apos;com.sinaapp.sanrenxing.web/src/com.sinaapp.sanrenxing.util&apos;&#x0D;&#x0A;- Original project: &apos;CheckProducts&apos;&#x0D;&#x0A;- Destination element: &apos;com.sinaapp.sanrenxing.web/src/com.sinaapp.sanrenxing.util&apos;&#x0D;&#x0A;- Original element: &apos;com.test.test.TestJackson.java&apos;" description="Copy compilation unit" destination="=com.sinaapp.sanrenxing.web/src&lt;com.sinaapp.sanrenxing.util" element1="/src&lt;com.test.test{TestJackson.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1397746563792" units="1" version="1.0"/>
+</session>

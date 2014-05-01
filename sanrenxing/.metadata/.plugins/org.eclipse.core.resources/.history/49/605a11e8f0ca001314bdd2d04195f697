@@ -1,0 +1,76 @@
+package com.sinaapp.sanrenxing.service.impl;
+
+import java.util.List;
+
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.sinaapp.sanrenxing.bean.RegisterLesson;
+import com.sinaapp.sanrenxing.bean.Relation;
+import com.sinaapp.sanrenxing.dao.RegisterDao;
+import com.sinaapp.sanrenxing.dao.SanrenxingDao;
+import com.sinaapp.sanrenxing.service.SanrenxingService;
+
+@Service
+public class SanrenxingServiceImpl implements SanrenxingService {
+	@Autowired
+	private SanrenxingDao dao;
+
+	Logger logger = Logger.getLogger(SanrenxingServiceImpl.class);
+
+	public String getToUserName(String fromUserName) {
+		List<Relation> r = dao.getToUserName(fromUserName);
+		if (r.size() > 1) {
+			// 多于两个，出异常了
+			logger.error("there is large than 1 relation exist!");
+			// 将所有关系切断
+			dao.stopRelation(fromUserName);
+			return null;
+		} else if (r.size() == 1) {
+			Relation relation = r.get(0);
+			String studentId = relation.getStudentId();
+			String teacherId = relation.getTeacherId();
+			return studentId.equalsIgnoreCase(fromUserName) ? teacherId
+					: studentId;
+		} else {
+			return null;
+		}
+	}
+
+	public RegisterLesson getLesson(String userName) {
+		List<RegisterLesson> lessons = dao.getLesson(userName);
+		if (lessons == null) {
+			return null;
+		} else if (lessons.size() > 1) {
+			// 多于两个，出异常了
+			logger.error("getLesson ,there is large than 1 relation exist!");
+			// 将所有关系切断
+			registerDao.deleteRequestLesson(userName);
+			return null;
+		} else {
+			return lessons.get(0);
+		}
+	}
+
+	public List<String> getTeachers(String classValue, String lessonValue) {
+		return dao.getTeachers(classValue, lessonValue);
+	}
+
+	public List<String> getForwardTeachers() {
+		return dao.getForwardTeachers();
+	}
+
+	public void stopService(String userName) {
+		dao.stopRelation(userName);
+	}
+
+	public void usePrevService(String userName) {
+		dao.usePrevService(userName);
+	}
+
+	public void startService(Relation relation) {
+		dao.startService(relation);
+	}
+
+}

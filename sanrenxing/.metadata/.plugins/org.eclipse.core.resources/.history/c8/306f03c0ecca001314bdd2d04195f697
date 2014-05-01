@@ -1,0 +1,26 @@
+package com.sinaapp.sanrenxing.dao;
+
+import java.util.List;
+
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.sinaapp.sanrenxing.bean.RegisterLesson;
+import com.sinaapp.sanrenxing.bean.Relation;
+
+@Repository
+@Transactional
+public interface SanrenxingDao {
+
+	List<Relation> getToUserName(String fromUserName);
+
+	void stopRelation(String userName);
+
+	List<RegisterLesson> getLesson(String userName);
+
+	List<String> getTeachers(String classValue, String lessonValue);
+
+	List<String> getForwardTeachers();
+
+	void usePrevService(String userName);
+}

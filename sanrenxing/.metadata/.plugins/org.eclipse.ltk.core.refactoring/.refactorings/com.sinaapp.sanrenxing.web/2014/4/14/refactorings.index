@@ -1,0 +1,7 @@
+1396329292217	Copy compilation unit
+1396332650271	Extract method 'addLessonMap'
+1396611097445	Extract local variable 'writeValueAsString'
+1396611128860	Rename local variable 'writeValueAsString'
+1396671397331	Rename type 'UnRegisterAction'
+1396717131327	Delete element
+1396717160117	Rename resource 'jquery-2.1.0.min.js'

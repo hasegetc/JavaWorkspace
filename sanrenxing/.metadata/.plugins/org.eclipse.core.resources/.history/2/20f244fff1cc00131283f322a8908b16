@@ -1,0 +1,33 @@
+package com.test.test;
+
+public class TestThread implements Runnable {
+	Object o = new Object();
+
+	public void run() {
+
+		for (int i = 0; i < 100; i++) {
+			run(i);
+
+		}
+
+	}
+
+	synchronized private void run(int i) {
+		System.out.println(Thread.currentThread().getName()
+				+ " synchronized loop " + i);
+		try {
+			Thread.sleep(100);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	public static void main(String[] args) {
+		TestThread t1 = new TestThread();
+		Thread ta = new Thread(t1, "A");
+		Thread tb = new Thread(t1, "B");
+		ta.start();
+		tb.start();
+	}
+}

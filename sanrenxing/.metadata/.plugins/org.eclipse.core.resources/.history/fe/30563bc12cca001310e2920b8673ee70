@@ -1,0 +1,112 @@
+package com.sinaapp.sanrenxing.util;
+
+import com.qq.weixin.sdk.consts.IMessageConsts;
+import com.qq.weixin.sdk.message.receive.ReceivedMessage;
+import com.qq.weixin.sdk.message.receive.commenmessage.ReceivedMultimediaMessage;
+import com.qq.weixin.sdk.message.receive.commenmessage.ReceivedVoiceMessage;
+import com.qq.weixin.sdk.message.receive.event.MeunEvent;
+import com.qq.weixin.sdk.message.response.customservice.ServiceTextMessage;
+import com.qq.weixin.sdk.message.response.passiveresponse.ResponcePictureMessage;
+import com.qq.weixin.sdk.message.response.passiveresponse.ResponceVoiceMessage;
+import com.sinaapp.sanrenxing.messagehandle.MenuEventHandle;
+
+public class ForwardUtil {
+
+	// if (receivedMessage.getMsgType().equalsIgnoreCase(
+	// IMessageConsts.MESSAGE_IMAGE)) {
+	// response = handlePicMessage(receivedMessage);
+	// } else if (receivedMessage.getMsgType().equalsIgnoreCase(
+	// IMessageConsts.MESSAGE_VOICE)) {
+	// response = handVoiceMessage(receivedMessage);
+	// } else if (receivedMessage.getMsgType().equalsIgnoreCase(
+	// IMessageConsts.MESSAGE_EVENT)) {
+	// MenuEventHandle.handle((MeunEvent) receivedMessage);
+	// } else {
+	// response = handTextMessage(receivedMessage);
+	// }
+
+	public static void forwardNotice(String response,
+			ReceivedMessage receivedMessage) {
+		getTextMessage(response, receivedMessage);
+		postCustomMsg(response);
+	}
+
+	private static void postCustomMsg(String response) {
+		if (response != null) {
+			CustomMsgUtil.postCustomMsg(response);
+		}
+	}
+
+	private String handVoiceMessage(ReceivedMessage receivedMessage) {
+
+		ResponceVoiceMessage responseMessage = new ResponceVoiceMessage();
+		responseMessage.setFromUserName(receivedMessage.getToUserName());
+		responseMessage.setToUserName(receivedMessage.getFromUserName());
+		responseMessage.setMediaId(((ReceivedVoiceMessage) receivedMessage)
+				.getMediaId());
+		responseMessage.setMsgType(IMessageConsts.MESSAGE_VOICE);
+		responseMessage
+				.setCreateTime((int) (System.currentTimeMillis() / 1000));
+		return responseMessage.generatorXml();
+
+	}
+
+	private String handlePicMessage(ReceivedMessage receivedMessage) {
+		//
+		// ResponseTextMessage responseMessage = new ResponseTextMessage();
+		// responseMessage.setFromUserName(receivedMessage.getToUserName());
+		// responseMessage.setToUserName(receivedMessage.getFromUserName());
+		// responseMessage.setContent(((ReceivedPictureMessage) receivedMessage)
+		// .getPicUrl());
+		// responseMessage.setMsgType(IMessageConsts.MESSAGE_TEXT);
+		// responseMessage
+		// .setCreateTime((int) (System.currentTimeMillis() / 1000));
+		// return responseMessage.generatorXml();
+
+		ResponcePictureMessage responseMessage = new ResponcePictureMessage();
+		responseMessage.setFromUserName(receivedMessage.getToUserName());
+		responseMessage.setToUserName(receivedMessage.getFromUserName());
+		String mediaId = ((ReceivedMultimediaMessage) receivedMessage)
+				.getMediaId();
+		responseMessage.setMediaId(mediaId);
+		logger.error("to:" + receivedMessage.getToUserName());
+		logger.error("MediaID:" + mediaId);
+		responseMessage.setMsgType(IMessageConsts.MESSAGE_IMAGE);
+		responseMessage
+				.setCreateTime((int) (System.currentTimeMillis() / 1000));
+		return responseMessage.generatorXml();
+
+	}
+
+	private static String getTextMessage(ReceivedMessage receivedMessage) {
+		ServiceTextMessage message = new ServiceTextMessage();
+
+		message.setMsgtype(IMessageConsts.MESSAGE_TEXT);
+		message.setTouser(receivedMessage.getFromUserName());
+		message.getText().setContent("I am LiuYuchao,Good Morning");
+
+		return message.generatorJson();
+	}
+
+	private String handTextMessage(ReceivedMessage receivedMessage) {
+		ServiceTextMessage message = new ServiceTextMessage();
+
+		message.setMsgtype(IMessageConsts.MESSAGE_TEXT);
+		message.setTouser(receivedMessage.getFromUserName());
+		message.getText().setContent("I am LiuYuchao,Good Morning");
+
+		return message.generatorJson();
+	}
+	//
+	// private String handTextMessage(ReceivedMessage receivedMessage) {
+	// ResponseTextMessage responseMessage = new ResponseTextMessage();
+	// responseMessage.setFromUserName(receivedMessage.getToUserName());
+	// responseMessage.setToUserName(receivedMessage.getFromUserName());
+	// responseMessage.setContent("I am LiuYuchao,Good Morning");
+	// responseMessage.setMsgType(IMessageConsts.MESSAGE_TEXT);
+	// responseMessage
+	// .setCreateTime((int) (System.currentTimeMillis() / 1000));
+	// return responseMessage.generatorXml();
+	// }
+
+}

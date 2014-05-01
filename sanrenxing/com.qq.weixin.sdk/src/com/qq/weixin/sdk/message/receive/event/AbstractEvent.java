@@ -2,6 +2,7 @@ package com.qq.weixin.sdk.message.receive.event;
 
 import org.dom4j.Element;
 
+import com.qq.weixin.sdk.consts.IMessageConsts;
 import com.qq.weixin.sdk.message.receive.ReceivedMessage;
 
 public abstract class AbstractEvent extends ReceivedMessage {
@@ -10,7 +11,7 @@ public abstract class AbstractEvent extends ReceivedMessage {
 
 	public AbstractEvent(Element root) {
 		super(root);
-		// TODO Auto-generated constructor stub
+		this.event = root.element(IMessageConsts.TAG_EVENT).getText();
 	}
 
 	public String getEvent() {

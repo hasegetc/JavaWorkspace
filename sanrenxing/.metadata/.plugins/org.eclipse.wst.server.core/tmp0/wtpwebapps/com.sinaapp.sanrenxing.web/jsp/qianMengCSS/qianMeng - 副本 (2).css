@@ -1,0 +1,27 @@
+@charset "utf-8";
+
+
+
+body {TEXT-ALIGN: center;}
+
+
+#main {width : 760px; height : 661; MARGIN-RIGHT: auto; MARGIN-LEFT: auto; overflow:hidden;border:1px solid black }
+
+
+.inside_test_text { width:140px; height:26px; text-align:right; float:left; line-height:26px;}
+.inside_test_content { width:auto; height:auto; overflow:hidden; float:left; margin-left:10px; line-height:26px;}
+.inside_test_content .textarea_style { width:380px; height:120px; border:1px solid #ccc; overflow:hidden;}
+.inside_test_content .file_style { width:380px; height:24px; line-height:24px; border:1px solid #ccc; overflow:hidden;}
+
+.result { width:380px; height:120px; border:1px solid #ccc; overflow:hidden;}
+
+
+
+
+
+
+
+
+
+#submit{ background:url(../share_icon.png); width:175px ; height:35px }
+ 

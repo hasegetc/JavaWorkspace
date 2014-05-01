@@ -73,5 +73,6 @@
 	
 	<!-- 加载其他spring配置文件 -->
 	<import resource="/spring-conf/bluemoonBeans.xml"/>
+	<import resource="/spring-conf/sanrenxingBeans.xml"/>
 	
 </beans>

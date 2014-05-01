@@ -1,0 +1,127 @@
+package com.sinaapp.sanrenxing.util;
+
+import com.qq.weixin.sdk.consts.IMessageConsts;
+import com.qq.weixin.sdk.message.receive.ReceivedMessage;
+import com.qq.weixin.sdk.message.receive.commenmessage.ReceivedMultimediaMessage;
+import com.qq.weixin.sdk.message.receive.commenmessage.ReceivedVoiceMessage;
+import com.qq.weixin.sdk.message.receive.event.MeunEvent;
+import com.qq.weixin.sdk.message.response.customservice.ServiceTextMessage;
+import com.qq.weixin.sdk.message.response.passiveresponse.AbstractResponseMessage;
+import com.qq.weixin.sdk.message.response.passiveresponse.ResponcePictureMessage;
+import com.qq.weixin.sdk.message.response.passiveresponse.ResponceVoiceMessage;
+import com.sinaapp.sanrenxing.messagehandle.MenuEventHandle;
+
+public class ForwardUtil {
+
+	public static void forwardNotice(String response,
+			ReceivedMessage receivedMessage) {
+
+		String resutl = getTextMessage(response, receivedMessage);
+		postCustomMsg(resutl);
+	}
+
+	private static void postCustomMsg(String response) {
+		if (response != null) {
+			CustomMsgUtil.postCustomMsg(response);
+		}
+	}
+
+	private static String handVoiceMessage(ReceivedMessage receivedMessage) {
+
+		ResponceVoiceMessage responseMessage = getVoiceMsg(receivedMessage);
+		return responseMessage.generatorXml();
+
+	}
+
+	private static ResponceVoiceMessage getVoiceMsg(
+			ReceivedMessage receivedMessage) {
+		ServieVoiceMessage responseMessage = new ServieVoiceMessage();
+		responseMessage.setFromUserName(receivedMessage.getToUserName());
+		responseMessage.setToUserName(receivedMessage.getFromUserName());
+		responseMessage.setMediaId(((ReceivedVoiceMessage) receivedMessage)
+				.getMediaId());
+		responseMessage.setMsgType(IMessageConsts.MESSAGE_VOICE);
+		responseMessage
+				.setCreateTime((int) (System.currentTimeMillis() / 1000));
+		return responseMessage;
+	}
+
+	private static String handlePicMessage(ReceivedMessage receivedMessage) {
+
+		ResponcePictureMessage responseMessage = getPicMsg(receivedMessage);
+		return responseMessage.generatorXml();
+
+	}
+
+	private static ResponcePictureMessage getPicMsg(
+			ReceivedMessage receivedMessage) {
+		ResponcePictureMessage responseMessage = new ResponcePictureMessage();
+		responseMessage.setFromUserName(receivedMessage.getToUserName());
+		responseMessage.setToUserName(receivedMessage.getFromUserName());
+		String mediaId = ((ReceivedMultimediaMessage) receivedMessage)
+				.getMediaId();
+		responseMessage.setMediaId(mediaId);
+		responseMessage.setMsgType(IMessageConsts.MESSAGE_IMAGE);
+		responseMessage
+				.setCreateTime((int) (System.currentTimeMillis() / 1000));
+		return responseMessage;
+	}
+
+	private static String getTextMessage(String response,
+			ReceivedMessage receivedMessage) {
+		ServiceTextMessage message = new ServiceTextMessage();
+
+		message.setMsgtype(IMessageConsts.MESSAGE_TEXT);
+		message.setTouser(receivedMessage.getFromUserName());
+		message.getText().setContent(response);
+
+		return message.generatorJson();
+	}
+
+	private static String handTextMessage(ReceivedMessage receivedMessage) {
+		ServiceTextMessage message = getTextMsg(receivedMessage);
+
+		return message.generatorJson();
+	}
+
+	private static ServiceTextMessage getTextMsg(ReceivedMessage receivedMessage) {
+		ServiceTextMessage message = new ServiceTextMessage();
+
+		message.setMsgtype(IMessageConsts.MESSAGE_TEXT);
+		message.setTouser(receivedMessage.getFromUserName());
+		message.getText().setContent("I am LiuYuchao,Good Morning");
+		return message;
+	}
+
+	//
+	// private String handTextMessage(ReceivedMessage receivedMessage) {
+	// ResponseTextMessage responseMessage = new ResponseTextMessage();
+	// responseMessage.setFromUserName(receivedMessage.getToUserName());
+	// responseMessage.setToUserName(receivedMessage.getFromUserName());
+	// responseMessage.setContent("I am LiuYuchao,Good Morning");
+	// responseMessage.setMsgType(IMessageConsts.MESSAGE_TEXT);
+	// responseMessage
+	// .setCreateTime((int) (System.currentTimeMillis() / 1000));
+	// return responseMessage.generatorXml();
+	// }
+
+	public static void forwardTo(String useId, ReceivedMessage receivedMessage) {
+		// TODO Auto-generated method stub
+
+		translateMsg(receivedMessage);
+	}
+
+	private static AbstractServiceMessage translateMsg(
+			ReceivedMessage receivedMessage) {
+		if (receivedMessage.getMsgType().equalsIgnoreCase(
+				IMessageConsts.MESSAGE_IMAGE)) {
+			return getPicMsg(receivedMessage);
+		} else if (receivedMessage.getMsgType().equalsIgnoreCase(
+				IMessageConsts.MESSAGE_VOICE)) {
+			return getVoiceMsg(receivedMessage);
+		} else {
+			return getTextMsg(receivedMessage);
+		}
+	}
+
+}

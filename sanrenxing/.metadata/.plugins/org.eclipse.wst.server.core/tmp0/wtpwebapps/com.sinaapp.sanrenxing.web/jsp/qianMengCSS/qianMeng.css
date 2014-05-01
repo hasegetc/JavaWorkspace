@@ -1,0 +1,28 @@
+@charset "utf-8";
+
+* {margin : 0 auto; padding:0; border:none }
+
+body {padding-top : 60px; width:auto;height:auto;  min-height: 1661px}
+
+
+#qian_meng_main {width : 760px; height : 1661; MARGIN-RIGHT: auto; MARGIN-LEFT: auto; overflow:hidden; border:1px solid black;padding-top:60px  }
+
+.qian_meng_notice { width:100%; height:auto; overflow:hidden; margin-top:10px;float:left ; text-align:left}
+
+.qian_meng_content { width:auto; height:auto; overflow:hidden; margin-left:10px; line-height:26px;}
+.qian_meng_content .textarea_style { width:350px; height:120px; border:1px solid #ccc; overflow:hidden;float:left; padding-bottom: 30px}
+.qian_meng_content .file_style { width:380px; height:24px; line-height:24px; border:1px solid #ccc; overflow:hidden;}
+
+.result { width:380px; height:120px; border:1px solid #ccc; overflow:hidden;}
+
+.text_scroll { width : 350px; height : 200px; border:1px solid #ccc; overflow:hidden;}
+.qian_meng_warning {  margin-top : 20px }
+
+
+
+
+
+
+
+#submit{ background:url(../share_icon.png); width:175px ; height:35px; margin-top : 50px; float:right }
+ 
