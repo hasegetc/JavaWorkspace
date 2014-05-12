@@ -1,0 +1,8 @@
+package com.qq.weixin.sdk.message.response.customservice;
+
+public class ServiceMultimediaMessage extends AbstractServiceMessage {
+
+	public String getMediaId();
+
+	public void setMediaId(String mediaId) ;
+}

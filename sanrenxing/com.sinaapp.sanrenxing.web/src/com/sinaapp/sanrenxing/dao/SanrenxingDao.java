@@ -26,11 +26,13 @@ public interface SanrenxingDao {
 
 	void deleteRequestLesson(String useid);
 
-	List<Relation> getToUserName(String fromUserName);
+	List<Relation> getRelation(String fromUserName);
 
 	void stopRelation(String userName);
 
 	List<RegisterLesson> getLesson(String userName);
+
+	List<RegisterLesson> getRequestLesson();
 
 	List<String> getForwardTeachers();
 
@@ -38,5 +40,10 @@ public interface SanrenxingDao {
 
 	void startService(Relation relation);
 
+	RequestLesson getPrevService(String userName);
+
 	List<String> getTeachers(Map<String, String> v);
+
+	void stopLesson(String userName);
+
 }

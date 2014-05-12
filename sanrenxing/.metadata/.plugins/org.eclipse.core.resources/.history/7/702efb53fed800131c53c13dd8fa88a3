@@ -1,0 +1,20 @@
+package com.qq.weixin.sdk.message.response.customservice;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class ServiceVoiceMessage extends ServiceMultimediaMessage {
+
+
+	private Map<String, String> voice = new HashMap<String, String>();
+
+	"voice":
+    {
+      "media_id":"MEDIA_ID"
+    }
+	@Override
+	public void setMediaId(String mediaId) {
+		voice.put("media_id", mediaId);
+	}
+
+}

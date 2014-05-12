@@ -2,8 +2,10 @@ package com.sinaapp.sanrenxing.consts;
 
 public interface IMenuConsts {
 
+	String REDIRECT_TEMPLATE = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=APPID&redirect_uri=REDIRECT_URI&response_type=code&scope=snsapi_base&state=xx#wechat_redirect";
+
 	String REGISTER_LESSON = "http://sanrenxing.sinaapp.com/jsp/registerLesson.jsp";
-	String UNREGISTER_LESSON = "http://sanrenxing.sinaapp.com/jsp/unregisterLesson.jsp";
+	String UNREGISTER_LESSON = "http://sanrenxing.sinaapp.com/jsp/unregister!getUseRegisterLesson.action";
 	// 申请辅导
 	String REQUEST_LESSON = "http://sanrenxing.sinaapp.com/jsp/requestLesson.jsp";
 

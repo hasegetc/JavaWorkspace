@@ -24,24 +24,30 @@ public class SanrenxingJob {
 
 	public void handleJob(ReceivedMessage receivedMessage) {
 
+		logger.error(receivedMessage.getMsgType());
 		// 处理event事件
 		if (receivedMessage.getMsgType().equalsIgnoreCase(
 				IMessageConsts.MESSAGE_EVENT)) {
+
+			// 点击菜单跳转链接时的事件推送,不处理
 			if (((MeunEvent) receivedMessage).getEvent().equalsIgnoreCase(
 					IMessageConsts.EVENT_VIEW)) {
 				return;
 			}
 			if (((MeunEvent) receivedMessage).getEventKey().equalsIgnoreCase(
 					IMenuConsts.STOP_SERVICE)) {
-				// 要清空两个东东
-				SanrenxingUtil.stopService(receivedMessage.getFromUserName());
+				/**
+				 * 将课程状态设为0 将relation状态设为0
+				 */
+				SanrenxingUtil.stopService(receivedMessage);
 			} else if (((MeunEvent) receivedMessage).getEventKey()
 					.equalsIgnoreCase(IMenuConsts.USE_PREV_LESSON)) {
-				SanrenxingUtil.usePrevLesson(receivedMessage.getFromUserName());
+				SanrenxingUtil.usePrevLesson(receivedMessage);
+
 			} else if (((MeunEvent) receivedMessage).getEventKey()
 					.equalsIgnoreCase(IMenuConsts.START_SERVICE)) {
-				// 要分別才師和學生id,老師ID可能下發好多次，這尼瑪怎么搞
-				SanrenxingUtil.startService(receivedMessage.getFromUserName());
+				// 要分辨老師和學生id,老師ID可能下發好多次，這尼瑪怎么搞
+				SanrenxingUtil.startService(receivedMessage);
 			}
 
 			return;
@@ -90,8 +96,9 @@ public class SanrenxingJob {
 		String fromUserName = receivedMessage.getFromUserName();
 
 		List<String> teachers = getTeachers(lesson, fromUserName);
-
+		String notice = "有同学提如下问题，请点“解答问题”菜单抢答[微笑]";
 		for (String v : teachers) {
+			ForwardUtil.forwardNotice(notice, v);
 			ForwardUtil.forwardTo(v, receivedMessage);
 			addTeacherMap(v, fromUserName);
 		}
@@ -103,7 +110,7 @@ public class SanrenxingJob {
 	}
 
 	/**
-	 * 不能转给自己，不能转给已经有课程的老师
+	 * 不能转给自己，不能转给已经有课程的老师，不能转给申请课程的人
 	 * 
 	 * @param fromUserName
 	 */
@@ -119,12 +126,17 @@ public class SanrenxingJob {
 		 * 得到所有正在转发中的老师
 		 */
 		List<String> forwardTeachers = SanrenxingUtil.getForwardTeachers();
+		
+		/**
+		 * 所有申请辅导的人
+		 */
+		List<String> requestUsers = SanrenxingUtil.getRequestUser();
 
 		int i = 0;
 		for (String v : teachers) {
 
 			if (!v.equalsIgnoreCase(fromUserName)
-					&& !forwardTeachers.contains(v)) {
+					&& !forwardTeachers.contains(v)&& !requestUsers.contains(v)) {
 				result.add(v);
 				i++;
 			}
@@ -145,5 +157,5 @@ public class SanrenxingJob {
 		// 不存在返回null
 		return SanrenxingUtil.getToUserName(fromUserName);
 	}
-	
+
 }

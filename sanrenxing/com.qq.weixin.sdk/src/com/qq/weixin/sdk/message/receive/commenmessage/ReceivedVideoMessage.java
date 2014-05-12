@@ -2,11 +2,13 @@ package com.qq.weixin.sdk.message.receive.commenmessage;
 
 import org.dom4j.Element;
 
+import com.qq.weixin.sdk.consts.IMessageConsts;
+
 public class ReceivedVideoMessage extends ReceivedMultimediaMessage {
 
 	public ReceivedVideoMessage(Element root) {
 		super(root);
-		// TODO Auto-generated constructor stub
+		this.thumbMediaId = root.element(IMessageConsts.TAG_THUMBMEDIAID).getText();
 	}
 
 	private String thumbMediaId;

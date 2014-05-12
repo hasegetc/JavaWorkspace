@@ -1,7 +1,11 @@
 package com.sinaapp.sanrenxing.menu;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -12,6 +16,7 @@ import com.sinaapp.sanrenxing.bean.ComplexMenu;
 import com.sinaapp.sanrenxing.bean.Menu;
 import com.sinaapp.sanrenxing.bean.ViewMenu;
 import com.sinaapp.sanrenxing.consts.IMenuConsts;
+import com.sinaapp.sanrenxing.consts.ISanrenxingConsts;
 
 /**
  * { "button":[ { "type":"click", "name":"今日歌曲", "key":"V1001_TODAY_MUSIC" }, {
@@ -25,7 +30,8 @@ import com.sinaapp.sanrenxing.consts.IMenuConsts;
  */
 public class CustomMenu {
 
-	private List<Menu> menuList = new ArrayList<Menu>(3);
+	private Map<String, List<Menu>> map = new HashMap<String, List<Menu>>();
+	private List<Menu> button = new ArrayList<Menu>(3);
 
 	protected ObjectMapper objectMapper = null;
 
@@ -39,11 +45,11 @@ public class CustomMenu {
 		/**
 		 * 第一个菜单
 		 */
-		Menu menu = new ViewMenu();
-		menu.setName("使用前一辅导");
-		((ViewMenu) menu).setType(CommonMenu.CLICK);
-		((ViewMenu) menu).setUrl(IMenuConsts.USE_PREV_LESSON);
-		menuList.add(menu);
+		Menu menu = new ClickMenu();
+		menu.setName("前一辅导");
+		((ClickMenu) menu).setType(CommonMenu.CLICK);
+		((ClickMenu) menu).setKey(IMenuConsts.USE_PREV_LESSON);
+		button.add(menu);
 
 		/**
 		 * 第二个菜单
@@ -52,41 +58,60 @@ public class CustomMenu {
 		menu.setName("结束辅导");
 		((ClickMenu) menu).setType(CommonMenu.CLICK);
 		((ClickMenu) menu).setKey(IMenuConsts.STOP_SERVICE);
-		menuList.add(menu);
+		button.add(menu);
 
 		// 第三個菜单
 		ComplexMenu complexmenu = new ComplexMenu();
 		complexmenu.setName("更多");
 
-		menu = new ClickMenu();
+		menu = new ViewMenu();
 		menu.setName("申请辅导");
-		((ClickMenu) menu).setType(CommonMenu.VIEW);
-		((ClickMenu) menu).setKey(IMenuConsts.REQUEST_LESSON);
+		((ViewMenu) menu).setType(CommonMenu.VIEW);
+		((ViewMenu) menu).setUrl(getUrl(IMenuConsts.REQUEST_LESSON));
+		complexmenu.getSub_button().add(menu);
+
+		menu = new ClickMenu();
+		menu.setName("解答问题");
+		((ClickMenu) menu).setType(CommonMenu.CLICK);
+		((ClickMenu) menu).setKey(IMenuConsts.START_SERVICE);
 		complexmenu.getSub_button().add(menu);
 
 		menu = new ViewMenu();
 		menu.setName("注册服务");
 		((ViewMenu) menu).setType(CommonMenu.VIEW);
-		((ViewMenu) menu).setUrl(IMenuConsts.REQUEST_LESSON);
+		((ViewMenu) menu).setUrl(getUrl(IMenuConsts.REGISTER_LESSON));
 		complexmenu.getSub_button().add(menu);
 
 		menu = new ViewMenu();
 		((ViewMenu) menu).setType(CommonMenu.VIEW);
-		((ViewMenu) menu).setUrl(IMenuConsts.UNREGISTER_LESSON);
+		((ViewMenu) menu).setUrl(getUrl(IMenuConsts.UNREGISTER_LESSON));
 		menu.setName("注消服务");
 		complexmenu.getSub_button().add(menu);
 
-		menuList.add(complexmenu);
+		button.add(complexmenu);
 
+		map.put("button", button);
 	}
 
 	public String getMenuJson() {
 
-		return getMenuJson(menuList);
+		return getMenuJson(map);
 
 	}
 
-	private String getMenuJson(List<Menu> v) {
+	private String getUrl(String name) {
+		try {
+			return IMenuConsts.REDIRECT_TEMPLATE.replace("APPID",
+					ISanrenxingConsts.APPID).replace("REDIRECT_URI",
+					URLEncoder.encode(name, "UTF-8"));
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	private String getMenuJson(Object v) {
 		String result = null;
 		try {
 			result = objectMapper.writeValueAsString(v);

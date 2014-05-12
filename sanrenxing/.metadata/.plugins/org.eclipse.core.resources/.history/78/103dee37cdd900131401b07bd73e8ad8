@@ -1,0 +1,129 @@
+package com.sinaapp.sanrenxing.service.impl;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.ServletContext;
+
+import org.apache.log4j.Logger;
+import org.apache.struts2.ServletActionContext;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.stereotype.Service;
+import org.springframework.web.context.support.WebApplicationContextUtils;
+
+import com.sinaapp.sanrenxing.bean.RegisterLesson;
+import com.sinaapp.sanrenxing.bean.Relation;
+import com.sinaapp.sanrenxing.bean.RequestLesson;
+import com.sinaapp.sanrenxing.dao.SanrenxingDao;
+import com.sinaapp.sanrenxing.service.SanrenxingService;
+
+@Service
+public class SanrenxingServiceImpl implements SanrenxingService {
+	@Autowired
+	private SanrenxingDao dao;
+
+	private static SanrenxingServiceImpl service = null;
+
+	Logger logger = Logger.getLogger(SanrenxingServiceImpl.class);
+
+	private SanrenxingServiceImpl() {
+
+	}
+
+	public static SanrenxingServiceImpl getInstance() {
+
+		if (service == null) {
+
+			ServletContext application = ServletActionContext.getRequest()
+					.getSession().getServletContext();
+			ApplicationContext context = WebApplicationContextUtils
+					.getWebApplicationContext(application);
+
+			service = (SanrenxingServiceImpl) context
+					.getBean("sanrenxingService");
+		}
+		return service;
+	}
+
+	public String getToUserName(String fromUserName) {
+		List<Relation> r = dao.getRelation(fromUserName);
+		if (r.size() > 1) {
+			// 多于两个，出异常了
+			logger.error("there is large than 1 relation exist!");
+			// 将所有关系切断
+			dao.stopRelation(fromUserName);
+			return null;
+		} else if (r.size() == 1) {
+			Relation relation = r.get(0);
+			String studentId = relation.getStudentId();
+			String teacherId = relation.getTeacherId();
+			return studentId.equalsIgnoreCase(fromUserName) ? teacherId
+					: studentId;
+		} else {
+			return null;
+		}
+	}
+
+	public RegisterLesson getLesson(String userName) {
+		List<RegisterLesson> lessons = dao.getLesson(userName);
+		if (lessons == null) {
+			return null;
+		} else if (lessons.size() > 1) {
+			// 多于两个，出异常了
+			logger.error("getLesson ,there is large than 1 relation exist!");
+			// 将所有关系切断
+			dao.deleteRequestLesson(userName);
+			return null;
+		} else {
+			return lessons.get(0);
+		}
+	}
+
+	public List<String> getTeachers(String classValue, String lessonValue) {
+		Map<String, String> v = new HashMap<String, String>();
+		v.put("classValue", classValue);
+		v.put("lessonValue", lessonValue);
+
+		return dao.getTeachers(v);
+	}
+
+	public List<String> getForwardTeachers() {
+		return dao.getForwardTeachers();
+	}
+
+	public void stopService(String userName) {
+		List<Relation> r = dao.getRelation(userName);
+		String studentId = null;
+		if (r.size() > 1) {
+			// 多于两个，出异常了
+			logger.error("there is large than 1 relation exist!");
+			
+		} else if (r.size() == 1) {
+			Relation relation = r.get(0);
+			studentId = relation.getStudentId();
+		}
+
+		if(studentId != null)
+		{
+			dao.stopRelation(studentId);
+		}
+		
+		// 此处用userName，防止未建立转发关系时（studentId == null）,用户点击结束辅导
+		dao.stopLesson(userName);
+	}
+
+	public void usePrevService(String userName) {
+		dao.usePrevService(userName);
+	}
+
+	public void startService(Relation relation) {
+		dao.startService(relation);
+	}
+
+	public RequestLesson getPrevService(String userName) {
+		return dao.getPrevService(userName);
+	}
+
+}

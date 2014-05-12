@@ -15,6 +15,7 @@ public interface IMessageConsts {
 	public static final String MESSAGE_LOCATION = "location";
 	public static final String MESSAGE_TEXT = "text";
 	public static final String MESSAGE_VOICE = "voice";
+	public static final String MESSAGE_VIDEO = "video";
 
 	// message response to user
 	public static final String MESSAGE_RESULT_MUSIC = "music";
@@ -57,5 +58,6 @@ public interface IMessageConsts {
 	public static final String TAG_URL = "Url";
 	public static final String TAG_XML = "xml";
 	public static final String TAG_FORMAT = "Format";
+	public static final String TAG_THUMBMEDIAID = "ThumbMediaId";
 
 }

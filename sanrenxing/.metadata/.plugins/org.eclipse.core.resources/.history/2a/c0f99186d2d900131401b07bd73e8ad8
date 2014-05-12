@@ -1,0 +1,109 @@
+package com.sinaapp.sanrenxing.util;
+
+import java.util.List;
+import java.util.Map.Entry;
+
+import org.apache.log4j.Logger;
+
+import com.qq.weixin.sdk.message.receive.ReceivedMessage;
+import com.sinaapp.sanrenxing.bean.RegisterLesson;
+import com.sinaapp.sanrenxing.bean.Relation;
+import com.sinaapp.sanrenxing.bean.RequestLesson;
+import com.sinaapp.sanrenxing.job.SanrenxingJob;
+import com.sinaapp.sanrenxing.service.impl.SanrenxingServiceImpl;
+
+public class SanrenxingUtil {
+
+	private static Logger logger = Logger.getLogger(SanrenxingUtil.class);
+	private static SanrenxingServiceImpl service = SanrenxingServiceImpl
+			.getInstance();
+
+	public static String getToUserName(String fromUserName) {
+		return service.getToUserName(fromUserName);
+	}
+
+	public static RegisterLesson getLesson(String userName) {
+		return service.getLesson(userName);
+	}
+
+	// 正在接受服务的老师不能转发
+	synchronized public static List<String> getTeachers(String classValue,
+			String lessonValue) {
+		return service.getTeachers(classValue, lessonValue);
+	}
+
+	/**
+	 * 得到所有正在转发中的老师
+	 */
+	public static List<String> getForwardTeachers() {
+		return service.getForwardTeachers();
+	}
+
+	public static void stopService(ReceivedMessage receivedMessage) {
+
+		service.stopService(receivedMessage.getFromUserName());
+		// 提示用户停止服务成功
+		String response = "停止服务成功，欢迎再次使用学而习！";
+		ForwardUtil.forwardNotice(response, receivedMessage);
+	}
+
+	public static void usePrevLesson(ReceivedMessage receivedMessage) {
+		String userName = receivedMessage.getFromUserName();
+		// 是否含有前一课程
+		RequestLesson r = service.getPrevService(userName);
+		if (r != null) {
+			service.usePrevService(userName);
+			String response = "您这次将使用" + r.getClassText() + r.getLessonText()
+					+ "课程，请发送消息";
+			ForwardUtil.forwardNotice(response, receivedMessage);
+		} else {
+			String response = "您没有前一课程，请申请辅导！";
+			ForwardUtil.forwardNotice(response, receivedMessage);
+		}
+	}
+
+	/**
+	 * 考虑多线程的问题 多线程调用此函数时要阻塞 多线程修改teachermap时要阻塞，会不会死锁？
+	 * 用户在startService时，不能将学生消息转发
+	 * 
+	 * @param tearchName
+	 */
+	synchronized public static boolean startService(
+			ReceivedMessage receivedMessage) {
+		String tearchName = receivedMessage.getFromUserName();
+		String studentName = SanrenxingJob.teacherMap.get(tearchName);
+		String response = null;
+		if (studentName == null) {
+			// 已经有老师回复，提示用户
+			response = "已经有老师抢到了此问题，谢谢您的关注！";
+			ForwardUtil.forwardNotice(response, receivedMessage);
+			return false;
+		}
+		Relation relation = new Relation();
+		relation.setTeacherId(tearchName);
+		relation.setStudentId(studentName);
+		relation.setStatus(1);
+		relation.setTimestamp(Long.toString(DateUtil.getTime()));
+		relation.setDate(DateUtil.getStringDate());
+		service.startService(relation);
+		
+		response = "您成功抢到此次服务，请帮助学生解答问题[微笑]";
+		ForwardUtil.forwardNotice(response, tearchName);
+		
+		response = "已为您找到老师，请等待老师的解答[微笑]";
+		ForwardUtil.forwardNotice(response, studentName);
+		
+		
+		for (Entry<String, String> v : SanrenxingJob.teacherMap.entrySet()) {
+			if (v.getValue().equalsIgnoreCase(studentName)) {
+				SanrenxingJob.teacherMap.remove(v.getKey());
+			}
+		}
+		return true;
+	}
+
+	
+	public static List<String> getRequestUser() {
+		return service.getRequestUser();
+	}
+}

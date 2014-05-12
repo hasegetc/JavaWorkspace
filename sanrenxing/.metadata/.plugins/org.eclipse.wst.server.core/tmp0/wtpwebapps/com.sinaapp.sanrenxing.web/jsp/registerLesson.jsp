@@ -18,8 +18,27 @@
 		$('#js_nextBtn').removeAttr("disabled");
 		$('#js_nextBtn').addClass("btn_primary");
 	}
+	$(document).ready(function() {
+	       var code =  '<%=request.getParameter("code")%>';
+
+	        $.ajax({
+	            type : "get",
+	            dataType: 'json',
+	            url : "userId!getUserId.action?code=" + code,
+	            async:false,
+	            success : function(result) {
+	            	var openid = result.openid;
+	            	$('#useid').val(openid);
+	            },
+	            error:function(error){ 
+	            	alert("error");
+	        	},
+	        });
+	        
+	});
 
 	$(document).ready(function() {
+
 		$('#js_addLessonBtn').click(function() {
 
 			var lesson = $('.lesson').last().clone();
@@ -103,7 +122,7 @@
 				</select>
 
 			</div>
-
+            <input id = "useid" type="hidden" name="useid" value="">
 			<div class="clear"></div>
 			<div class="tool_bar border with_form">
 				<button type="button" id="js_addLessonBtn"

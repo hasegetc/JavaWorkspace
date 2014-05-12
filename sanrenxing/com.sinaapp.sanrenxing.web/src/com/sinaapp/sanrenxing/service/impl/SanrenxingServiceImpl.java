@@ -1,5 +1,6 @@
 package com.sinaapp.sanrenxing.service.impl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,6 +16,7 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import com.sinaapp.sanrenxing.bean.RegisterLesson;
 import com.sinaapp.sanrenxing.bean.Relation;
+import com.sinaapp.sanrenxing.bean.RequestLesson;
 import com.sinaapp.sanrenxing.dao.SanrenxingDao;
 import com.sinaapp.sanrenxing.service.SanrenxingService;
 
@@ -45,9 +47,9 @@ public class SanrenxingServiceImpl implements SanrenxingService {
 		}
 		return service;
 	}
-
+	
 	public String getToUserName(String fromUserName) {
-		List<Relation> r = dao.getToUserName(fromUserName);
+		List<Relation> r = dao.getRelation(fromUserName);
 		if (r.size() > 1) {
 			// 多于两个，出异常了
 			logger.error("there is large than 1 relation exist!");
@@ -93,7 +95,24 @@ public class SanrenxingServiceImpl implements SanrenxingService {
 	}
 
 	public void stopService(String userName) {
-		dao.stopRelation(userName);
+		List<Relation> r = dao.getRelation(userName);
+		String studentId = null;
+		if (r.size() > 1) {
+			// 多于两个，出异常了
+			logger.error("there is large than 1 relation exist!");
+			
+		} else if (r.size() == 1) {
+			Relation relation = r.get(0);
+			studentId = relation.getStudentId();
+		}
+
+		if(studentId != null)
+		{
+			dao.stopRelation(studentId);
+		}
+		
+		// 此处用userName，防止未建立转发关系时（studentId == null）,用户点击结束辅导
+		dao.stopLesson(userName);
 	}
 
 	public void usePrevService(String userName) {
@@ -102,6 +121,19 @@ public class SanrenxingServiceImpl implements SanrenxingService {
 
 	public void startService(Relation relation) {
 		dao.startService(relation);
+	}
+
+	public RequestLesson getPrevService(String userName) {
+		return dao.getPrevService(userName);
+	}
+
+	public List<String> getRequestUser() {
+		List<RegisterLesson> requestLesson = dao.getRequestLesson();
+		List<String> result = new ArrayList<String>();
+		for (RegisterLesson v : requestLesson) {
+			result.add(v.getUseid());
+		}
+		return result;
 	}
 
 }

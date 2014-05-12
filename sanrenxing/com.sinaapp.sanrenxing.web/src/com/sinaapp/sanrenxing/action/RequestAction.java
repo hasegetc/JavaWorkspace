@@ -38,13 +38,13 @@ public class RequestAction extends ActionSupport {
 
 		requestLesson.setLesson(lesson);
 		requestLesson.setClassValue(classValue);
-		requestLesson.setUseid("Test");
+		requestLesson.setUseid(useid);
 		requestLesson.setTimestamp(Long.toString(DateUtil.getTime()));
 		requestLesson.setDate(DateUtil.getStringDate());
 		// 1表示有效，0表示失效
 		requestLesson.setStatus(1);
 		
-		this.service.deleteRequestLesson("Test");
+		this.service.deleteRequestLesson(useid);
 		this.service.requestLesson(requestLesson);
 
 		return NONE;

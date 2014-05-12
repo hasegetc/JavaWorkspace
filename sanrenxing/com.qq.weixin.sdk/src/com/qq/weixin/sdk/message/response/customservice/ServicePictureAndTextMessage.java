@@ -41,9 +41,9 @@ public class ServicePictureAndTextMessage extends ServiceMultimediaMessage {
 	}
 
 	@Override
-	public String generatorJson() {
+	public void setMediaId(String mediaId) {
 		// TODO Auto-generated method stub
-		return null;
+		
 	}
 
 }

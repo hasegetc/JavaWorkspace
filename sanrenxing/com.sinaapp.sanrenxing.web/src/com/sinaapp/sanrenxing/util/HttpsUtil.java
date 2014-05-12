@@ -29,7 +29,7 @@ public class HttpsUtil {
 	 *            提交的数据
 	 * @return JSONObject(通过JSONObject.get(key)的方式获取json对象的属性值)
 	 */
-	public static JSONObject post(String requestUrl, String outputStr) {
+	public static boolean post(String requestUrl, String outputStr) {
 		JSONObject jsonObject = null;
 		StringBuffer buffer = new StringBuffer();
 		try {
@@ -58,6 +58,72 @@ public class HttpsUtil {
 				outputStream.write(outputStr.getBytes("UTF-8"));
 				outputStream.close();
 			}
+
+			// 将返回的输入流转换成字符串
+			InputStream inputStream = httpUrlConn.getInputStream();
+			InputStreamReader inputStreamReader = new InputStreamReader(
+					inputStream, "utf-8");
+			BufferedReader bufferedReader = new BufferedReader(
+					inputStreamReader);
+
+			String str = null;
+			while ((str = bufferedReader.readLine()) != null) {
+				buffer.append(str);
+			}
+			bufferedReader.close();
+			inputStreamReader.close();
+			// 释放资源
+			inputStream.close();
+			inputStream = null;
+			httpUrlConn.disconnect();
+			jsonObject = JSONObject.fromObject(buffer.toString());
+		} catch (ConnectException ce) {
+			log.error("Weixin server connection timed out.", ce);
+		} catch (Exception e) {
+			log.error("https request error:{}", e);
+		}
+		int errcode = jsonObject.getInt("errcode");
+		if (errcode == 0) {
+			return true;
+		} else {
+			log.error("https post error,the error info is :"
+					+ jsonObject.toString());
+			return false;
+		}
+
+	}
+
+	/**
+	 * 发起https请求并获取结果
+	 * 
+	 * @param requestUrl
+	 *            请求地址
+	 * @param outputStr
+	 *            提交的数据
+	 * @return JSONObject(通过JSONObject.get(key)的方式获取json对象的属性值)
+	 */
+	public static JSONObject get(String requestUrl) {
+		JSONObject jsonObject = null;
+		StringBuffer buffer = new StringBuffer();
+		try {
+			// 创建SSLContext对象，并使用我们指定的信任管理器初始化
+			TrustManager[] tm = { new MyX509TrustManager() };
+			SSLContext sslContext = SSLContext.getInstance("SSL", "SunJSSE");
+			sslContext.init(null, tm, new java.security.SecureRandom());
+			// 从上述SSLContext对象中得到SSLSocketFactory对象
+			SSLSocketFactory ssf = sslContext.getSocketFactory();
+
+			URL url = new URL(requestUrl);
+			HttpsURLConnection httpUrlConn = (HttpsURLConnection) url
+					.openConnection();
+			httpUrlConn.setSSLSocketFactory(ssf);
+
+			httpUrlConn.setDoOutput(true);
+			httpUrlConn.setDoInput(true);
+			httpUrlConn.setUseCaches(false);
+			// 设置请求方式（GET/POST）
+			httpUrlConn.setRequestMethod("GET");
+			httpUrlConn.connect();
 
 			// 将返回的输入流转换成字符串
 			InputStream inputStream = httpUrlConn.getInputStream();

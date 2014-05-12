@@ -7,6 +7,7 @@ import com.qq.weixin.sdk.consts.IMessageConsts;
 import com.qq.weixin.sdk.message.receive.ReceivedMessage;
 import com.qq.weixin.sdk.message.receive.commenmessage.ReceivedPictureMessage;
 import com.qq.weixin.sdk.message.receive.commenmessage.ReceivedTextMessage;
+import com.qq.weixin.sdk.message.receive.commenmessage.ReceivedVideoMessage;
 import com.qq.weixin.sdk.message.receive.commenmessage.ReceivedVoiceMessage;
 import com.qq.weixin.sdk.message.receive.event.MeunEvent;
 
@@ -15,7 +16,6 @@ public class MessageUtil {
 	static Logger logger = Logger.getLogger(MessageUtil.class);
 
 	public static ReceivedMessage getMessage(Element root) {
-
 		String type = root.element(IMessageConsts.TAG_MSGTYPE).getText();
 
 		ReceivedMessage receivedMessage = null;
@@ -36,9 +36,11 @@ public class MessageUtil {
 		} else if (type.equalsIgnoreCase(IMessageConsts.MESSAGE_LOCATION)) {
 
 		} else if (type.equalsIgnoreCase(IMessageConsts.MESSAGE_VOICE)) {
-
+			
 			receivedMessage = new ReceivedVoiceMessage(root);
 			
+		}else if (type.equalsIgnoreCase(IMessageConsts.MESSAGE_VIDEO)) {
+			receivedMessage = new ReceivedVideoMessage(root);
 		}
 
 		return receivedMessage;

@@ -7,6 +7,8 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import net.sf.json.JSONObject;
+
 import org.apache.log4j.Logger;
 import org.apache.struts2.ServletActionContext;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -18,6 +20,7 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.sinaapp.sanrenxing.bean.RegisterLesson;
 import com.sinaapp.sanrenxing.service.RegisterService;
+import com.sinaapp.sanrenxing.util.HttpsUtil;
 
 @Component
 @Scope("prototype")
@@ -25,11 +28,28 @@ public class UnregisterAction extends ActionSupport {
 	private static final long serialVersionUID = -3617424650852024180L;
 	@Autowired
 	private RegisterService service;
-	
+
 	private Logger logger = Logger.getLogger(UnregisterAction.class);
 	private String useid;
+	private String code;
+
 	private Map<String, List<String>> lessonMap = new HashMap<String, List<String>>();
+
 	public String getUseRegisterLesson() {
+
+		ActionContext context = ActionContext.getContext();
+		Map<String, Object> session = context.getSession();
+		String url = UserIdAction.getUrl(code);
+
+		JSONObject jsonObject = HttpsUtil.get(url);
+
+		if (!jsonObject.containsKey("openid")) {
+			logger.error("get user Openid error, the info is"
+					+ jsonObject.toString());
+		} else {
+			useid = jsonObject.getString("openid");
+			session.put("useid", useid);
+		}
 
 		// 得到数据库中已经在在的值
 		List<RegisterLesson> registedLessons = this.service
@@ -39,9 +59,8 @@ public class UnregisterAction extends ActionSupport {
 			addLessonMap(v);
 		}
 
-		ActionContext context = ActionContext.getContext();
 		String result = parse2Json();
-		context.getSession().put("result", result);
+		session.put("result", result);
 		return SUCCESS;
 	}
 
@@ -61,7 +80,7 @@ public class UnregisterAction extends ActionSupport {
 
 		RegisterLesson unregisterLesson = new RegisterLesson();
 		unregisterLesson.setClassValue(classValue);
-		unregisterLesson.setUseid("Test");
+		unregisterLesson.setUseid(useid);
 		unregisterLesson.setLesson(lesson);
 
 		this.service.unregisterLesson(unregisterLesson);
@@ -105,6 +124,14 @@ public class UnregisterAction extends ActionSupport {
 
 	public void setLessonMap(Map<String, List<String>> lessonMap) {
 		this.lessonMap = lessonMap;
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
 	}
 
 }

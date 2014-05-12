@@ -29,6 +29,9 @@
 		<action name="unregister" class="unregisterAction">
 			<result name="success">/jsp/unregisterLesson.jsp</result>
 		</action>
+		<action name="userId" class="userIdAction">
+			
+		</action>
 		<action name="*" class="sanrenxingAction">
 		</action>
 	</package>

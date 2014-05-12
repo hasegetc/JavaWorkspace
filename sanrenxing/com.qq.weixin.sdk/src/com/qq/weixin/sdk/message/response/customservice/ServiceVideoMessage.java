@@ -1,30 +1,37 @@
 package com.qq.weixin.sdk.message.response.customservice;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class ServiceVideoMessage extends ServiceMultimediaMessage {
 
-	private String title;
-	private String description;
-
-	public String getTitle() {
-		return title;
-	}
+	private Map<String, String> video = new HashMap<String, String>();
 
 	public void setTitle(String title) {
-		this.title = title;
-	}
-
-	public String getDescription() {
-		return description;
+		video.put("title", title);
 	}
 
 	public void setDescription(String description) {
-		this.description = description;
+		video.put("description", description);
 	}
 
 	@Override
-	public String generatorJson() {
-		// TODO Auto-generated method stub
-		return null;
+	public void setMediaId(String mediaId) {
+		video.put("media_id", mediaId);
+	}
+
+	public Map<String, String> getVideo() {
+		return video;
+	}
+
+	public void setVideo(Map<String, String> video) {
+		this.video = video;
+	}
+
+	public static void main(String[] args) {
+		ServiceVideoMessage t =new ServiceVideoMessage();
+		t.setMediaId( "Hello World");
+		System.err.println(t.generatorJson());
 	}
 
 }

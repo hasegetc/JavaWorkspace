@@ -20,6 +20,26 @@
 	}
 
 	$(document).ready(function() {
+	       var code =  '<%=request.getParameter("code")%>';
+
+	        $.ajax({
+	            type : "get",
+	            dataType: 'json',
+	            url : "userId!getUserId.action?code=" + code,
+	            async:false,
+	            success : function(result) {
+	            	var openid = result.openid;
+	            	$('#useid').val(openid);
+	            },
+	            error:function(error){ 
+	            	alert("error");
+	        	},
+	        });
+	        
+	});
+
+	
+	$(document).ready(function() {
 
 		$("#submitBtn").click(function() {
 			$("#submitBtn").attr("disabled", true);
@@ -84,7 +104,7 @@
 				</select>
 
 			</div>
-
+            <input id = "useid" type="hidden" name="useid" value="">
 			<div class="clear"></div>
 			<div class="tool_bar border with_form">
 				<button type="submit" id="submitBtn"

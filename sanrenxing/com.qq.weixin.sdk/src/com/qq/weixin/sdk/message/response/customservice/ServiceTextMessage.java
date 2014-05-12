@@ -1,36 +1,19 @@
 package com.qq.weixin.sdk.message.response.customservice;
 
-import org.apache.log4j.Logger;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ServiceTextMessage extends AbstractServiceMessage {
 
-	private Logger logger = Logger.getLogger(ServiceTextMessage.class);
-	private Content text = new Content();
+	private Map<String, String> text = new HashMap<String, String>();
 
-	public Content getText() {
+	public Map<String, String> getText() {
 		return text;
 	}
 
-	public class Content {
-		String content;
-
-		public String getContent() {
-			return content;
-		}
-
-		public void setContent(String content) {
-			this.content = content;
-		}
-	}
-
-	@Override
-	public String generatorJson() {
-		try {
-			return objectMapper.writeValueAsString(this);
-		} catch (Exception e) {
-			logger.error(e);
-		}
-		return null;
+	public void setText(String text) {
+		
+		this.text.put("content", text);
 	}
 
 }

@@ -1,9 +1,10 @@
 package com.qq.weixin.sdk.message.response.customservice;
 
+import org.apache.log4j.Logger;
 import org.codehaus.jackson.map.ObjectMapper;
 
 public abstract class AbstractServiceMessage {
-
+	private Logger logger = Logger.getLogger(AbstractServiceMessage.class);
 	private String touser;
 	private String msgtype;
 	protected ObjectMapper objectMapper = new ObjectMapper();;
@@ -24,5 +25,12 @@ public abstract class AbstractServiceMessage {
 		this.msgtype = msgtype;
 	}
 
-	public abstract String generatorJson();
+	public String generatorJson() {
+		try {
+			return objectMapper.writeValueAsString(this);
+		} catch (Exception e) {
+			logger.error(e);
+		}
+		return null;
+	}
 }

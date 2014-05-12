@@ -1,15 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="com.qq.weixin.sdk.message.response.customservice.ServiceMultimediaMessage"/>
-<fullyQualifiedTypeName name="java.lang.Override"/>
-<fullyQualifiedTypeName name="com.sinaapp.sanrenxing.consts.SanrenxingConsts"/>
-<fullyQualifiedTypeName name="org.dom4j.io.SAXReader"/>
-<fullyQualifiedTypeName name="org.dom4j.Element"/>
-<fullyQualifiedTypeName name="com.qq.weixin.sdk.message.receive.AbstractReceivedMessage"/>
-<fullyQualifiedTypeName name="com.qq.weixin.sdk.message.receive.commenmessage.ReceivedPictureMessage"/>
-<fullyQualifiedTypeName name="com.sinaapp.sanrenxing.action.SanrenxingAction"/>
-<fullyQualifiedTypeName name="com.qq.weixin.sdk.message.receive.ReceivedMessage"/>
-<fullyQualifiedTypeName name="com.qq.weixin.sdk.message.response.passiveresponse.ResponcePictureMessage"/>
 <fullyQualifiedTypeName name="java.util.logging.Logger"/>
 <fullyQualifiedTypeName name="com.qq.weixin.sdk.util.WeixinUtil"/>
 <fullyQualifiedTypeName name="com.qq.weixin.sdk.message.response.passiveresponse.ResponseTextMessage"/>
@@ -30,7 +20,6 @@
 <fullyQualifiedTypeName name="com.test.bean.Birthday"/>
 <fullyQualifiedTypeName name="com.qq.weixin.sdk.message.response.customservice.ServiceTextMessage.Content"/>
 <fullyQualifiedTypeName name="net.sf.json.JSONObject"/>
-<fullyQualifiedTypeName name="com.sinaapp.sanrenxing.consts.ISanrenxingConsts"/>
 <fullyQualifiedTypeName name="com.sinaapp.sanrenxing.util.WeixinUtil"/>
 <fullyQualifiedTypeName name="org.apache.http.client.methods.HttpPost"/>
 <fullyQualifiedTypeName name="org.apache.http.NameValuePair"/>
@@ -40,12 +29,10 @@
 <fullyQualifiedTypeName name="com.sinaapp.sanrenxing.bean.CustomMenu.Menu"/>
 <fullyQualifiedTypeName name="com.sinaapp.sanrenxing.bean.CustomMenu.ClickMenu"/>
 <fullyQualifiedTypeName name="ognl.IntHashMap.Entry"/>
-<fullyQualifiedTypeName name="org.apache.derby.tools.sysinfo"/>
 <fullyQualifiedTypeName name="com.sinaapp.sanrenxing.bean.CustomMenu"/>
 <fullyQualifiedTypeName name="com.sinaapp.sanrenxing.bean.Menu"/>
 <fullyQualifiedTypeName name="com.sinaapp.sanrenxing.util.MessageUtil"/>
 <fullyQualifiedTypeName name="com.qq.weixin.sdk.message.receive.event.MeunEvent"/>
-<fullyQualifiedTypeName name="org.apache.log4j.Logger"/>
 <fullyQualifiedTypeName name="com.sinaapp.sanrenxing.dao.RegisterDao"/>
 <fullyQualifiedTypeName name="java.util.List"/>
 <fullyQualifiedTypeName name="com.sinaapp.sanrenxing.util.ForwardUtil"/>
@@ -57,7 +44,20 @@
 <fullyQualifiedTypeName name="com.sinaapp.sanrenxing.bean.Relation"/>
 <fullyQualifiedTypeName name="com.sinaapp.sanrenxing.util.DateUtil"/>
 <fullyQualifiedTypeName name="com.sinaapp.sanrenxing.dao.SanrenxingDao"/>
-<fullyQualifiedTypeName name="java.util.HashMap"/>
 <fullyQualifiedTypeName name="java.lang.Object"/>
 <fullyQualifiedTypeName name="java.lang.System"/>
+<fullyQualifiedTypeName name="com.sinaapp.sanrenxing.consts.ISanrenxingConsts"/>
+<fullyQualifiedTypeName name="org.apache.catalina.util.URLEncoder"/>
+<fullyQualifiedTypeName name="java.net.URLEncoder"/>
+<fullyQualifiedTypeName name="com.sinaapp.sanrenxing.util.HttpsUtil"/>
+<fullyQualifiedTypeName name="javax.servlet.http.HttpServletResponse"/>
+<fullyQualifiedTypeName name="org.apache.log4j.Logger"/>
+<fullyQualifiedTypeName name="org.apache.commons.collections.map.HashedMap"/>
+<fullyQualifiedTypeName name="java.util.LinkedHashMap"/>
+<fullyQualifiedTypeName name="org.apache.derby.tools.sysinfo"/>
+<fullyQualifiedTypeName name="java.util.HashMap"/>
+<fullyQualifiedTypeName name="com.qq.weixin.sdk.message.response.customservice.CopyOfServiceTextMessage"/>
+<fullyQualifiedTypeName name="com.qq.weixin.sdk.message.response.customservice.AbstractServiceMessage"/>
+<fullyQualifiedTypeName name="com.qq.weixin.sdk.message.response.customservice.ServiceMultimediaMessage"/>
+<fullyQualifiedTypeName name="com.qq.weixin.sdk.message.receive.commenmessage.ReceivedVideoMessage"/>
 </qualifiedTypeNameHistroy>

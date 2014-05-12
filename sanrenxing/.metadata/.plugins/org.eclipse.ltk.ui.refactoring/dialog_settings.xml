@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
-	<section name="RefactoringStatusDialog">
-		<item value="816" key="DIALOG_WIDTH"/>
-		<item value="495" key="DIALOG_HEIGHT"/>
-		<item value="1|微软雅黑|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|微软雅黑" key="DIALOG_FONT_NAME"/>
+	<section name="RefactoringWizard.Externalize strings in &apos;BlueMoonJob.java&apos;">
+		<item value="503" key="height"/>
+		<item value="662" key="width"/>
 	</section>
 	<section name="ExtractTempWizard">
 		<item value="true" key="replaceOccurrences"/>
 		<item value="false" key="declareFinal"/>
 	</section>
-	<section name="RefactoringWizard.Externalize strings in &apos;BlueMoonJob.java&apos;">
-		<item value="503" key="height"/>
-		<item value="662" key="width"/>
+	<section name="RefactoringStatusDialog">
+		<item value="816" key="DIALOG_WIDTH"/>
+		<item value="495" key="DIALOG_HEIGHT"/>
+		<item value="1|微软雅黑|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|微软雅黑" key="DIALOG_FONT_NAME"/>
 	</section>
 	<section name="RefactoringWizard.Externalize strings in &apos;SanrenxingAction.java&apos;">
 		<item value="400" key="height"/>

@@ -14,7 +14,6 @@ public class CustomMsgUtil {
 				ISanrenxingConsts.APPSECRET);
 
 		String url = POST_CUSTOM_MESSAGE_URL.replace("ACCESS_TOKEN", token);
-		HttpsUtil.post(url, response);
-		return false;
+		return HttpsUtil.post(url, response);
 	}
 }

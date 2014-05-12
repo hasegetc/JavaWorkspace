@@ -14,9 +14,12 @@ public class MenuManager {
 				ISanrenxingConsts.APPSECRET);
 
 		CustomMenu menu = new CustomMenu();
-		
+
 		String url = CUSTOM_MENU_URL.replace("ACCESS_TOKEN", token);
-		HttpsUtil.post(url, menu.getMenuJson());
-	
+		boolean result = HttpsUtil.post(url, menu.getMenuJson());
+
+		if (!result) {
+			System.err.println("create Menu error");
+		}
 	}
 }

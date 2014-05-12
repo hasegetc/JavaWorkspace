@@ -1,0 +1,166 @@
+package com.sinaapp.sanrenxing.util;
+
+import org.apache.log4j.Logger;
+
+import com.qq.weixin.sdk.consts.IMessageConsts;
+import com.qq.weixin.sdk.message.receive.ReceivedMessage;
+import com.qq.weixin.sdk.message.receive.commenmessage.ReceivedMultimediaMessage;
+import com.qq.weixin.sdk.message.receive.commenmessage.ReceivedTextMessage;
+import com.qq.weixin.sdk.message.receive.commenmessage.ReceivedVoiceMessage;
+import com.qq.weixin.sdk.message.response.customservice.AbstractServiceMessage;
+import com.qq.weixin.sdk.message.response.customservice.ServicePictureMessage;
+import com.qq.weixin.sdk.message.response.customservice.ServiceTextMessage;
+import com.qq.weixin.sdk.message.response.customservice.ServiceVideoMessage;
+import com.qq.weixin.sdk.message.response.customservice.ServiceVoiceMessage;
+
+public class ForwardUtil {
+
+	private static Logger logger = Logger.getLogger(ForwardUtil.class);
+
+	public static boolean forwardNotice(String response,
+			ReceivedMessage receivedMessage) {
+
+		String message = getTextMessage(response, receivedMessage);
+		boolean success = postCustomMsg(message);
+		if (!success) {
+			logger.error("forwardNotice error, the info is " + message);
+		}
+		return success;
+	}
+
+	public static boolean forwardTo(String useId,
+			ReceivedMessage receivedMessage) {
+		// TODO Auto-generated method stub
+		logger.error(receivedMessage.getMsgType());
+		AbstractServiceMessage translateMsg = translateMsg(receivedMessage);
+		translateMsg.setTouser(useId);
+		logger.error(translateMsg.getMsgType());
+		logger.error(translateMsg.generatorJson());
+		return postCustomMsg(translateMsg.generatorJson());
+	}
+
+	private static boolean postCustomMsg(String response) {
+		if (response != null) {
+			return CustomMsgUtil.postCustomMsg(response);
+		}
+		return false;
+	}
+
+	private static String handVoiceMessage(ReceivedMessage receivedMessage) {
+
+		ServiceVoiceMessage responseMessage = getVoiceMsg(receivedMessage);
+		return responseMessage.generatorJson();
+
+	}
+
+	private static ServiceVoiceMessage getVoiceMsg(
+			ReceivedMessage receivedMessage) {
+		ServiceVoiceMessage responseMessage = new ServiceVoiceMessage();
+
+		responseMessage.setMediaId(((ReceivedVoiceMessage) receivedMessage)
+				.getMediaId());
+		responseMessage.setMsgtype(IMessageConsts.MESSAGE_VOICE);
+		responseMessage.setTouser(receivedMessage.getFromUserName());
+
+		return responseMessage;
+	}
+
+	private static String handlePicMessage(ReceivedMessage receivedMessage) {
+
+		ServicePictureMessage responseMessage = getPicMsg(receivedMessage);
+		return responseMessage.generatorJson();
+
+	}
+
+	private static ServicePictureMessage getPicMsg(
+			ReceivedMessage receivedMessage) {
+		ServicePictureMessage responseMessage = new ServicePictureMessage();
+		responseMessage
+				.setMediaId(((ReceivedMultimediaMessage) receivedMessage)
+						.getMediaId());
+		responseMessage.setMsgtype(IMessageConsts.MESSAGE_IMAGE);
+		responseMessage.setTouser(receivedMessage.getFromUserName());
+		return responseMessage;
+	}
+
+	private static String getTextMessage(String response,
+			ReceivedMessage receivedMessage) {
+		ServiceTextMessage message = new ServiceTextMessage();
+
+		message.setMsgtype(IMessageConsts.MESSAGE_TEXT);
+		message.setTouser(receivedMessage.getFromUserName());
+		message.setText(response);
+
+		return message.generatorJson();
+	}
+
+	private static String handTextMessage(ReceivedMessage receivedMessage) {
+		ServiceTextMessage message = getTextMsg(receivedMessage);
+
+		return message.generatorJson();
+	}
+
+	private static ServiceVideoMessage getVideoMsg(
+			ReceivedMessage receivedMessage) {
+		ServiceVideoMessage message = new ServiceVideoMessage();
+		message.setDescription("学而习辅导");
+		message.setMediaId(Long.toString(receivedMessage.getMsgId()));
+		message.setMsgtype(IMessageConsts.MESSAGE_VIDEO);
+		message.setTitle("学而习辅导");
+		message.setTouser(receivedMessage.getFromUserName());
+		return message;
+	}
+	
+
+	private static ServiceTextMessage getTextMsg(ReceivedMessage receivedMessage) {
+		ServiceTextMessage message = new ServiceTextMessage();
+
+		message.setMsgtype(IMessageConsts.MESSAGE_TEXT);
+		message.setTouser(receivedMessage.getFromUserName());
+		message.setText(((ReceivedTextMessage) receivedMessage).getContent());
+		return message;
+	}
+
+	private static AbstractServiceMessage translateMsg(
+			ReceivedMessage receivedMessage) {
+		if (receivedMessage.getMsgType().equalsIgnoreCase(
+				IMessageConsts.MESSAGE_IMAGE)) {
+			return getPicMsg(receivedMessage);
+		} else if (receivedMessage.getMsgType().equalsIgnoreCase(
+				IMessageConsts.MESSAGE_VOICE)) {
+			return getVoiceMsg(receivedMessage);
+		} else if (receivedMessage.getMsgType().equalsIgnoreCase(
+				IMessageConsts.MESSAGE_VIDEO)) {
+			logger.error(IMessageConsts.MESSAGE_VIDEO);
+			return getVideoMsg(receivedMessage);
+		} else if (receivedMessage.getMsgType().equalsIgnoreCase(
+				IMessageConsts.MESSAGE_TEXT)) {
+			return getTextMsg(receivedMessage);
+		}
+		logger.error("the msg type is not handled, the type is "
+				+ receivedMessage.getMsgType());
+		return null;
+	}
+
+	public static boolean forwardNotice(String response, String userName) {
+
+		String message = getTextMessage(response, userName);
+		boolean success = postCustomMsg(message);
+		if (!success) {
+			logger.error("forwardNotice error, the info is " + message);
+		}
+		return success;
+	}
+
+	private static String getTextMessage(String response, String userName) {
+
+		ServiceTextMessage message = new ServiceTextMessage();
+
+		message.setMsgtype(IMessageConsts.MESSAGE_TEXT);
+		message.setTouser(userName);
+		message.setText(response);
+
+		return message.generatorJson();
+	}
+
+}

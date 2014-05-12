@@ -1,8 +1,5 @@
 package com.qq.weixin.sdk.message.response.passiveresponse;
 
-import java.util.Map;
-import java.util.Map.Entry;
-
 import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Element;

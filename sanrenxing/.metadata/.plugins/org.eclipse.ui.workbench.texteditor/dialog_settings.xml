@@ -13,16 +13,16 @@
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="false" key="wholeword"/>
-		<item value="synchronized" key="selection"/>
+		<item value="getTextMessage" key="selection"/>
 		<list key="findhistory">
+			<item value="getTextMessage"/>
+			<item value="alert"/>
+			<item value="replace"/>
+			<item value="ajax"/>
+			<item value="使用前一辅导"/>
 			<item value="synchronized"/>
 			<item value="volatile"/>
 			<item value="vali"/>
-			<item value="teacherMap"/>
-			<item value="scope"/>
-			<item value="getEvent"/>
-			<item value="birthdays"/>
-			<item value="PostMethod "/>
 		</list>
 		<list key="replacehistory">
 		</list>

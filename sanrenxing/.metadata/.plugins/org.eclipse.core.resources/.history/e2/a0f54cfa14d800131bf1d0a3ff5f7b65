@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sinaapp.sanrenxing.dao.SanrenxingDao">
+
+	<insert id="registerLesson" parameterType="java.util.List">
+		insert into register_lesson (
+		use_id,
+		class,
+		lesson
+		)
+		values
+		<foreach collection="list" item="item" index="index" open="("
+			separator="),(" close=")">
+			#{item.useid,jdbcType=VARCHAR},#{item.classValue,jdbcType=VARCHAR},#{item.lesson,jdbcType=VARCHAR}
+		</foreach>
+
+	</insert>
+
+	<insert id="requestLesson" parameterType="com.sinaapp.sanrenxing.bean.RequestLesson">
+
+		insert into
+		request_lesson (
+		use_id,
+		class,
+		lesson,
+		status,
+		date,
+		timestamp
+		)
+		values(#{useid,jdbcType=VARCHAR},#{classValue,jdbcType=VARCHAR},#{lesson,jdbcType=VARCHAR},#{status},#{date},#{timestamp})
+	</insert>
+
+	<select id="getRegistedLesson" parameterType="String"
+		resultType="com.sinaapp.sanrenxing.bean.RegisterLesson">
+		select class as classValue, lesson as lesson from
+		register_lesson where use_id = #{useId};
+	</select>
+
+	<delete id="unregisterLesson" parameterType="com.sinaapp.sanrenxing.bean.RegisterLesson">
+		delete from
+		register_lesson where use_id = #{useid} and class = #{classValue} and
+		lesson = #{lesson};
+	</delete>
+
+	<delete id="unregisterAllLesson" parameterType="String">
+		delete from
+		register_lesson where use_id = #{useid};
+	</delete>
+
+	<delete id="deleteRequestLesson" parameterType="String">
+		update
+		request_lesson set status = 0 where use_id = #{useid};
+	</delete>
+
+	<select id="getToUserName" parameterType="String"
+		resultType="com.sinaapp.sanrenxing.bean.Relation">
+		select teacher_id as teacherId, student_id as studentId,
+		status as status,
+		timestamp as timestamp ,date as date from
+		relation where (teacher_id = #{fromUserName}
+		or student_id =
+		#{fromUserName} )and
+		status = 1
+	</select>
+
+	<update id="stopRelation" parameterType="String">
+		update relation set
+		status = 0 where teacher_id = #{userName} or
+		student_id =
+		#{userName}
+	</update>
+
+	<insert id="startService" parameterType="String">
+		insert into
+		relation(teacher_id,student_id,status,timestamp,date)
+		values(#{teacherId},#{studentId},#{status},#{timestamp},#{date})
+	</insert>
+
+	<update id="usePrevService" parameterType="String">
+		update relation set
+		status = 1 where student_id =
+		#{userName}) and timestamp = (select max(timestamp) from relation )
+	</update>
+
+	<select id="getPrevService" parameterType="String" resultType = "com.sinaapp.sanrenxing.bean.Relation">
+		select teacher_id as teacherId, student_id as studentId,status, timestamp, date from relation  where where student_id =
+		#{userName}) and timestamp = (select max(timestamp) from relation )
+	</select>
+	
+	<select id="getLesson" parameterType="String"
+		resultType="com.sinaapp.sanrenxing.bean.RegisterLesson">
+		select use_id as useid,class as
+		classValue,lesson,timestamp,date,status
+		from request_lesson where
+		use_id = #{userName} and status = 1;
+	</select>
+
+	<select id="getTeachers" resultType="String">
+		Select use_id From
+		register_lesson where class = #{classValue} and lesson =
+		#{lessonValue};
+	</select>
+
+	<select id="getForwardTeachers">
+		Select teacher_id From relation where status = 1;
+	</select>
+
+</mapper>

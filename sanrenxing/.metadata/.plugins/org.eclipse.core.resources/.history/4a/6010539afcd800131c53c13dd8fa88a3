@@ -1,0 +1,12 @@
+package com.qq.weixin.sdk.message.response.customservice;
+
+public class ServicePictureMessage extends ServiceMultimediaMessage {
+
+
+	public static void main(String[] args) {
+		ServicePictureMessage t =new ServicePictureMessage();
+		t.getText().put("content", "Hello World");
+		System.err.println(t.generatorJson());
+	}
+
+}

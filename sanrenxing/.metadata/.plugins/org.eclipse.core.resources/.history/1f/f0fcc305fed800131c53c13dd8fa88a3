@@ -1,0 +1,11 @@
+package com.qq.weixin.sdk.message.response.customservice;
+
+public class ServiceVoiceMessage extends ServiceMultimediaMessage {
+
+	@Override
+	public void setMediaId(String mediaId) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

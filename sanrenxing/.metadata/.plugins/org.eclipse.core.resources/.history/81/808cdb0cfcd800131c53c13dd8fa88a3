@@ -1,0 +1,18 @@
+package com.qq.weixin.sdk.message.response.customservice;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import org.apache.log4j.Logger;
+
+public class ServiceTextMessage extends AbstractServiceMessage {
+
+	private Logger logger = Logger.getLogger(ServiceTextMessage.class);
+	private Map<String, String> text = new HashMap<String, String>();
+
+	public Map<String, String> getText() {
+		return text;
+	}
+
+
+}

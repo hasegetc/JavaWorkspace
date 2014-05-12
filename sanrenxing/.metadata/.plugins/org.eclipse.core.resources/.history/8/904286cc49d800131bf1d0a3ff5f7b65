@@ -1,0 +1,94 @@
+package com.sinaapp.sanrenxing.bean;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import org.apache.derby.tools.sysinfo;
+
+public class RequestLesson {
+	private String useid;
+	private String classValue;
+	private String lesson;
+
+	private String timestamp;
+	private String date;
+
+	// 1表示有效，0表示失效
+	private int status;
+
+	
+	private Map<String, String> lessonMap = new HashMap<String, String>();
+	{
+		lessonMap.put("math", "数学");
+		lessonMap.put("physical", "物理");
+		lessonMap.put("chemistry", "化学");
+		lessonMap.put("english", "英语");
+		lessonMap.put("biological", "生物");
+	}
+
+	private Map<String, String> classMap = new HashMap<String, String>();
+	{
+		/**
+		 * 
+		 <s:if test='key==""'>小学</s:if> <s:elseif
+		 * test='key==""'>初中</s:elseif> <s:elseif
+		 * test='key==""'>高中</s:elseif>
+		 */
+		classMap.put("primary", "小学");
+		classMap.put("junior", "初中");
+		classMap.put("senior", "高中");
+	}
+
+	public static void main(String[] args) {
+		System.err.println(RequestLesson.classMap);
+	}
+	
+	public String getUseid() {
+		return useid;
+	}
+
+	public void setUseid(String useid) {
+		this.useid = useid;
+	}
+
+	public String getClassValue() {
+		return classValue;
+	}
+
+	public void setClassValue(String classValue) {
+		this.classValue = classValue;
+	}
+
+	public String getLesson() {
+		return lesson;
+	}
+
+	public void setLesson(String lesson) {
+		this.lesson = lesson;
+	}
+
+	public String getTimestamp() {
+		return timestamp;
+	}
+
+	public void setTimestamp(String timestamp) {
+		this.timestamp = timestamp;
+	}
+
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
+	}
+
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
+
+}

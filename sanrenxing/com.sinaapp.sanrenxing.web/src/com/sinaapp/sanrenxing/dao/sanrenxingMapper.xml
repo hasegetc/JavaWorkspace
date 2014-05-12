@@ -53,12 +53,13 @@
 		request_lesson set status = 0 where use_id = #{useid};
 	</delete>
 
-	<select id="getToUserName" parameterType="String"
+	<select id="getRelation" parameterType="String"
 		resultType="com.sinaapp.sanrenxing.bean.Relation">
 		select teacher_id as teacherId, student_id as studentId,
 		status as status,
 		timestamp as timestamp ,date as date from
-		relation where (teacher_id = #{fromUserName}
+		relation
+		where (teacher_id = #{fromUserName}
 		or student_id =
 		#{fromUserName} )and
 		status = 1
@@ -66,10 +67,11 @@
 
 	<update id="stopRelation" parameterType="String">
 		update relation set
-		on_service = 0 where teacher_id = #{userName} or
+		status = 0 where teacher_id = #{userName} or
 		student_id =
 		#{userName}
 	</update>
+
 
 	<insert id="startService" parameterType="String">
 		insert into
@@ -78,10 +80,26 @@
 	</insert>
 
 	<update id="usePrevService" parameterType="String">
-		update relation set
-		on_service = 1 where (teacher_id = #{userName} or
-		student_id =
-		#{userName}) and timestamp = (select max(timestamp) from relation )
+		update request_lesson
+		set
+		status = 1 where use_id =
+		#{userName} and timestamp = (
+		select
+		timestamp from ( select max(timestamp) as timestamp from
+		request_lesson ) as a )
+
+	</update>
+
+	<select id="getPrevService" parameterType="String"
+		resultType="com.sinaapp.sanrenxing.bean.RequestLesson">
+		select use_id as useid, class as classValue, lesson,
+		timestamp, date, status from request_lesson where use_id =
+		#{userName}
+		and timestamp = (select max(timestamp) from request_lesson )
+	</select>
+
+	<update id="stopLesson" parameterType="String">
+		update request_lesson set status = 0 where use_id = #{userName}
 	</update>
 
 	<select id="getLesson" parameterType="String"
@@ -92,13 +110,19 @@
 		use_id = #{userName} and status = 1;
 	</select>
 
+	<select id="getRequestLesson" resultType="com.sinaapp.sanrenxing.bean.RegisterLesson">
+		select use_id as useid,class as
+		classValue,lesson,timestamp,date,status
+		from request_lesson where status = 1;
+	</select>
+
 	<select id="getTeachers" resultType="String">
 		Select use_id From
 		register_lesson where class = #{classValue} and lesson =
 		#{lessonValue};
 	</select>
 
-	<select id="getForwardTeachers">
+	<select id="getForwardTeachers" resultType="String">
 		Select teacher_id From relation where status = 1;
 	</select>
 

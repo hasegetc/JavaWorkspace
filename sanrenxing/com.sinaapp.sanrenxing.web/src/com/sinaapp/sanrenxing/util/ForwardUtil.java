@@ -1,26 +1,36 @@
 package com.sinaapp.sanrenxing.util;
 
+import org.apache.log4j.Logger;
+
 import com.qq.weixin.sdk.consts.IMessageConsts;
 import com.qq.weixin.sdk.message.receive.ReceivedMessage;
 import com.qq.weixin.sdk.message.receive.commenmessage.ReceivedMultimediaMessage;
+import com.qq.weixin.sdk.message.receive.commenmessage.ReceivedTextMessage;
+import com.qq.weixin.sdk.message.receive.commenmessage.ReceivedVideoMessage;
 import com.qq.weixin.sdk.message.receive.commenmessage.ReceivedVoiceMessage;
 import com.qq.weixin.sdk.message.response.customservice.AbstractServiceMessage;
 import com.qq.weixin.sdk.message.response.customservice.ServicePictureMessage;
 import com.qq.weixin.sdk.message.response.customservice.ServiceTextMessage;
+import com.qq.weixin.sdk.message.response.customservice.ServiceVideoMessage;
 import com.qq.weixin.sdk.message.response.customservice.ServiceVoiceMessage;
 
 public class ForwardUtil {
 
+	private static Logger logger = Logger.getLogger(ForwardUtil.class);
+
 	public static boolean forwardNotice(String response,
 			ReceivedMessage receivedMessage) {
 
-		String result = getTextMessage(response, receivedMessage);
-		return postCustomMsg(result);
+		String message = getTextMessage(response, receivedMessage);
+		boolean success = postCustomMsg(message);
+		if (!success) {
+			logger.error("forwardNotice error, the info is " + message);
+		}
+		return success;
 	}
 
-	public static boolean forwardTo(String useId, ReceivedMessage receivedMessage) {
-		// TODO Auto-generated method stub
-
+	public static boolean forwardTo(String useId,
+			ReceivedMessage receivedMessage) {
 		AbstractServiceMessage translateMsg = translateMsg(receivedMessage);
 		translateMsg.setTouser(useId);
 		return postCustomMsg(translateMsg.generatorJson());
@@ -33,18 +43,11 @@ public class ForwardUtil {
 		return false;
 	}
 
-	private static String handVoiceMessage(ReceivedMessage receivedMessage) {
-
-		ServiceVoiceMessage responseMessage = getVoiceMsg(receivedMessage);
-		return responseMessage.generatorJson();
-
-	}
-
 	private static ServiceVoiceMessage getVoiceMsg(
 			ReceivedMessage receivedMessage) {
 		ServiceVoiceMessage responseMessage = new ServiceVoiceMessage();
 
-		responseMessage.setMediaID(((ReceivedVoiceMessage) receivedMessage)
+		responseMessage.setMediaId(((ReceivedVoiceMessage) receivedMessage)
 				.getMediaId());
 		responseMessage.setMsgtype(IMessageConsts.MESSAGE_VOICE);
 		responseMessage.setTouser(receivedMessage.getFromUserName());
@@ -52,18 +55,11 @@ public class ForwardUtil {
 		return responseMessage;
 	}
 
-	private static String handlePicMessage(ReceivedMessage receivedMessage) {
-
-		ServicePictureMessage responseMessage = getPicMsg(receivedMessage);
-		return responseMessage.generatorJson();
-
-	}
-
 	private static ServicePictureMessage getPicMsg(
 			ReceivedMessage receivedMessage) {
 		ServicePictureMessage responseMessage = new ServicePictureMessage();
 		responseMessage
-				.setMediaID(((ReceivedMultimediaMessage) receivedMessage)
+				.setMediaId(((ReceivedMultimediaMessage) receivedMessage)
 						.getMediaId());
 		responseMessage.setMsgtype(IMessageConsts.MESSAGE_IMAGE);
 		responseMessage.setTouser(receivedMessage.getFromUserName());
@@ -76,23 +72,29 @@ public class ForwardUtil {
 
 		message.setMsgtype(IMessageConsts.MESSAGE_TEXT);
 		message.setTouser(receivedMessage.getFromUserName());
-		message.getText().setContent(response);
+		message.setText(response);
 
 		return message.generatorJson();
 	}
 
-	private static String handTextMessage(ReceivedMessage receivedMessage) {
-		ServiceTextMessage message = getTextMsg(receivedMessage);
-
-		return message.generatorJson();
+	private static ServiceVideoMessage getVideoMsg(
+			ReceivedMessage receivedMessage) {
+		ServiceVideoMessage message = new ServiceVideoMessage();
+		message.setDescription("学而习辅导");
+		message.setMediaId(((ReceivedVideoMessage)receivedMessage).getMediaId());
+		message.setMsgtype(IMessageConsts.MESSAGE_VIDEO);
+		message.setTitle("学而习辅导");
+		message.setTouser(receivedMessage.getFromUserName());
+		return message;
 	}
+	
 
 	private static ServiceTextMessage getTextMsg(ReceivedMessage receivedMessage) {
 		ServiceTextMessage message = new ServiceTextMessage();
 
 		message.setMsgtype(IMessageConsts.MESSAGE_TEXT);
 		message.setTouser(receivedMessage.getFromUserName());
-		message.getText().setContent("I am LiuYuchao,Good Morning");
+		message.setText(((ReceivedTextMessage) receivedMessage).getContent());
 		return message;
 	}
 
@@ -104,9 +106,37 @@ public class ForwardUtil {
 		} else if (receivedMessage.getMsgType().equalsIgnoreCase(
 				IMessageConsts.MESSAGE_VOICE)) {
 			return getVoiceMsg(receivedMessage);
-		} else {
+		} else if (receivedMessage.getMsgType().equalsIgnoreCase(
+				IMessageConsts.MESSAGE_VIDEO)) {
+			return getVideoMsg(receivedMessage);
+		} else if (receivedMessage.getMsgType().equalsIgnoreCase(
+				IMessageConsts.MESSAGE_TEXT)) {
 			return getTextMsg(receivedMessage);
 		}
+		logger.error("the msg type is not handled, the type is "
+				+ receivedMessage.getMsgType());
+		return null;
+	}
+
+	public static boolean forwardNotice(String response, String userName) {
+
+		String message = getTextMessage(response, userName);
+		boolean success = postCustomMsg(message);
+		if (!success) {
+			logger.error("forwardNotice error, the info is " + message);
+		}
+		return success;
+	}
+
+	private static String getTextMessage(String response, String userName) {
+
+		ServiceTextMessage message = new ServiceTextMessage();
+
+		message.setMsgtype(IMessageConsts.MESSAGE_TEXT);
+		message.setTouser(userName);
+		message.setText(response);
+
+		return message.generatorJson();
 	}
 
 }

@@ -1,0 +1,28 @@
+package com.qq.weixin.sdk.message.response.customservice;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import org.apache.log4j.Logger;
+
+public class CopyOfServiceTextMessage extends AbstractServiceMessage {
+
+	private Logger logger = Logger.getLogger(CopyOfServiceTextMessage.class);
+	private Map<String,String> text = new HashMap<String,String>();
+
+	public static void main(String[] args) {
+		CopyOfServiceTextMessage t =new CopyOfServiceTextMessage()
+		
+	}
+
+	@Override
+	public String generatorJson() {
+		try {
+			return objectMapper.writeValueAsString(this);
+		} catch (Exception e) {
+			logger.error(e);
+		}
+		return null;
+	}
+
+}
